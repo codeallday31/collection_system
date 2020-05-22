@@ -23,16 +23,17 @@
                             </span>
                         </a>
                         <div id="account_menu" class="dropdown-menu dropdown-menu-right">
-                            {{-- <div class="dropdown-item-text dropdown-item-text--lh">
-                                <div><strong>Adrian Demian</strong></div>
-                                <div>@adriandemian</div>
-                            </div> --}}
-                            {{-- <div class="dropdown-divider"></div> --}}
-                            {{-- <a class="dropdown-item active" href="index.html">Dashboard</a> --}}
-                            {{-- <a class="dropdown-item" href="profile.html">My profile</a> --}}
-                            {{-- <a class="dropdown-item" href="edit-account.html">Edit account</a> --}}
-                            {{-- <div class="dropdown-divider"></div> --}}
-                            <a class="dropdown-item" href="login.html">Logout</a>
+                            <a 
+                                class="dropdown-item"
+                                href=" {{route('logout')}} " 
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                            >
+                                Logout
+                            </a>
+    
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
                         </div>
                     </li>
                 </ul>
