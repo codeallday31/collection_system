@@ -15,39 +15,47 @@
         <a href="index.html" class="navbar-brand flex-column mb-2 align-items-center mr-0" style="min-width: 0">
             <img src="{{ asset('img/cam.jpg') }}" alt="logo" width="90%" class="ml-4">
         </a>
-        {{-- <p class="m-0">Login to access your CAM Account</p> --}}
     </div>
-
-    {{-- <div class="alert alert-soft-success d-flex" role="alert">
-        <i class="material-icons mr-3">check_circle</i>
-        <div class="text-body">An email with password reset instructions has been sent to your email address, if it exists on our system.</div>
-    </div> --}}
-
-    {{-- <a href="" class="btn btn-light btn-block">
-        <span class="fab fa-google mr-2"></span>
-        Continue with Google
-    </a> --}}
-
-    {{-- <div class="page-separator">
-        <div class="page-separator__text">or</div>
-    </div> --}}
-
-    <form action="index.html" novalidate>
+    <form action="{{ route('login')}}" method="POST">
+        @csrf
         <div class="form-group">
-            <label class="text-label" for="email_2">Email Address:</label>
+            <label class="text-label  {{ $errors->has('username') || $errors->has('email') ? 'text-danger' : '' }}" for="useremail">Email Address:</label>
             <div class="input-group input-group-merge">
-                <input id="email_2" type="email" required="" class="form-control form-control-prepended" placeholder="Email address">
+                <input 
+                    id="useremail" 
+                    type="text" 
+                    required="" 
+                    class="form-control form-control-prepended {{ $errors->has('username') || $errors->has('email') ? ' is-invalid' : '' }}" 
+                    placeholder="Email address/Username"
+                    name="useremail"
+                    autofocus
+                    value="{{ old('username') ?: old('email') }}"
+                >
+                
                 <div class="input-group-prepend">
                     <div class="input-group-text">
                         <span class="far fa-envelope"></span>
                     </div>
                 </div>
             </div>
+            <div class="invalid-feedback">Please provide a valid city.</div>
         </div>
         <div class="form-group">
-            <label class="text-label" for="password_2">Password:</label>
+            <label class="text-label {{ $errors->has('username') || $errors->has('email') ? 'text-danger' : '' }}" for="password">Password:</label>
             <div class="input-group input-group-merge">
-                <input id="password_2" type="password" required="" class="form-control form-control-prepended" placeholder="Password">
+                <input 
+                    id="password" 
+                    type="password" 
+                    required="" 
+                    class="form-control form-control-prepended {{ $errors->has('username') || $errors->has('email') ? ' is-invalid' : '' }}" 
+                    placeholder="Password"
+                    name="password"
+                >
+                @if ($errors->has('username') || $errors->has('email'))
+                    <span class="invalid-feedback">
+                        <strong>{{ $errors->first('username') ?: $errors->first('email') }}</strong>
+                    </span>
+                @endif
                 <div class="input-group-prepend">
                     <div class="input-group-text">
                         <span class="fa fa-key"></span>
