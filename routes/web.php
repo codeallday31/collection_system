@@ -20,7 +20,19 @@ use Illuminate\Support\Facades\Auth;
 Route::middleware('auth')->group(function(){
 
     Route::get('/', function () {
-        return view('admin/index');
+        return view('index');
+    })->name('homepage');
+    
+    Route::prefix('user')->group(function () {
+        Route::name('user.')->group(function () {
+            Route::get('registration', function () {
+                return view('user.registration');
+            })->name('registration');
+
+            Route::get('role', function () {
+                return view('user.role');
+            })->name('role');
+        });
     });
 
 });

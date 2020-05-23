@@ -3,11 +3,18 @@
         <div class="flex">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0">
-                    <li class="breadcrumb-item"><a href="#">Menu</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                    @if ($menu->toHtml() !== 'home')
+                         <li class="breadcrumb-item">
+                            <a href="{{ route('homepage') }} ">
+                                <i class="material-icons icon-20pt">home</i>
+                            </a>
+                        </li>
+                    @endif
+                    <li class="breadcrumb-item">{{ $menu ?? ''}}</li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ $currentPage ?? ''}}</li>
                 </ol>
             </nav>
-            <h1 class="m-0">Dashboard</h1>
+            <h1 class="m-0">{{ ucfirst($currentPage) ?? '' }}</h1>
         </div>
     </div>
 </div>
