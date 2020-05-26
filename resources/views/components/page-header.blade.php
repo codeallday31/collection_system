@@ -1,20 +1,28 @@
-<div class="container-fluid page__heading-container">
-    <div class="page__heading d-flex align-items-center">
-        <div class="flex">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb mb-0">
-                    @if ($menu->toHtml() !== 'home')
-                         <li class="breadcrumb-item">
-                            <a href="{{ route('homepage') }} ">
-                                <i class="material-icons icon-20pt">home</i>
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0 text-dark text-capitalize">{{ $currentPage ?? '' }}</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    @if($menu->toHtml() !== 'home')
+                        <li class="breadcrumb-item text-capitalize">
+                            <a href="{{ route('homepage') }}">
+                                <i class="fas fa-home"></i>
                             </a>
                         </li>
                     @endif
-                    <li class="breadcrumb-item">{{ $menu ?? ''}}</li>
-                    <li class="breadcrumb-item active" aria-current="page">{{ $currentPage ?? ''}}</li>
+                    <li class="breadcrumb-item text-capitalize">
+                        @if($menu->toHtml() === 'home')
+                            <a href="{{ route('homepage') }}">{{ $menu ?? '' }}</a>
+                        @else
+                            {{ $menu ?? '' }}
+                        @endif
+                    </li>
+                    <li class="breadcrumb-item text-capitalize active"> {{ $breadCrumbPage ?? '' }} </li>
                 </ol>
-            </nav>
-            <h1 class="m-0">{{ ucfirst($currentPage) ?? '' }}</h1>
+            </div>
         </div>
     </div>
 </div>

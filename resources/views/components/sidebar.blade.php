@@ -1,66 +1,64 @@
-<div class="mdk-drawer  js-mdk-drawer" id="default-drawer" data-align="start">
-    <div class="mdk-drawer__content">
-        <div class="sidebar sidebar-light sidebar-left simplebar" data-simplebar>
-            <div class="d-flex align-items-center sidebar-p-a border-bottom sidebar-account">
-                <a href="profile.html" class="flex d-flex align-items-center text-underline-0 text-body">
-                    <span class="avatar mr-3">
-                        <img src="assets/images/avatar/demi.png" alt="avatar" class="avatar-img rounded-circle">
-                    </span>
-                    <span class="flex d-flex flex-column">
-                        <strong>Adrian Demian</strong>
-                        <small class="text-muted text-uppercase">Account Manager</small>
-                    </span>
-                </a>
-                <div class="dropdown ml-auto">
-                    <a href="#" data-toggle="dropdown" data-caret="false" class="text-muted"><i class="material-icons">more_vert</i></a>
-                    <div class="dropdown-menu dropdown-menu-right">
-                        <div class="dropdown-item-text dropdown-item-text--lh">
-                            <div><strong>Adrian Demian</strong></div>
-                            <div>@adriandemian</div>
-                        </div>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item active" href="index.html">Dashboard</a>
-                        <a class="dropdown-item" href="profile.html">My profile</a>
-                        <a class="dropdown-item" href="edit-account.html">Edit account</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="login.html">Logout</a>
-                    </div>
-                </div>
-            </div>
-            <div class="sidebar-heading sidebar-m-t">Menu</div>
-            <ul class="sidebar-menu">
-                <li class="sidebar-menu-item {{ request()->is('/') ? 'active' : '' }}">
-                    <a class="sidebar-menu-button" href=" {{ route('homepage') }} ">
-                        <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">dvr</i>
-                        <span class="sidebar-menu-text">Dashboards</span>
+<aside class="main-sidebar elevation-2 sidebar-light-primary">
+    <!-- Brand Logo -->
+    <a href="{{ route('homepage') }}" class="brand-link navbar-secondary">
+      {{-- <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+           style="opacity: .8"> --}}
+      <span class="brand-text font-weight-light">AdminLTE 3</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user panel (optional) -->
+      {{-- <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+          <a href="#" class="d-block">Alexander Pierce</a>
+        </div>
+      </div> --}}
+
+      <!-- Sidebar Menu -->
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column nav-child-indent nav-legacy" data-widget="treeview" role="menu" data-accordion="false">
+            <!-- Add icons to the links using the .nav-icon class
+                with font-awesome or any other icon font library -->
+                <li class="nav-header text-uppercase">Menu</li>
+                <li class="nav-item">
+                    <a href="{{ route('homepage') }}" class="nav-link {{ request()->is('/') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                        <p>
+                            Dashboard
+                        </p>
                     </a>
                 </li>
-            </ul>
-
-            <div class="sidebar-heading">Transaction</div>
-            <div class="sidebar-heading">Reports</div>
-            <div class="sidebar-heading">Maintenance</div>
-            <ul class="sidebar-menu">
-                <li class="sidebar-menu-item {{ request()->is('user/*') ? 'active open' : '' }}">
-                    <a class="sidebar-menu-button" data-toggle="collapse" href="#maintenance_user">
-                        <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">person</i>
-                        <span class="sidebar-menu-text">User</span>
-                        <span class="ml-auto sidebar-menu-toggle-icon"></span>
+                <li class="nav-header text-uppercase">Transactions</li>
+                <li class="nav-header text-uppercase">Reports</li>
+                <li class="nav-header text-uppercase">Maintenance</li>
+                <li class="nav-item has-treeview {{ request()->is('user/*') || request()->is('user') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ request()->is('user/*') || request()->is('user') ?  'active' : '' }}">
+                        <i class="nav-icon fas fa-users-cog"></i>
+                        <p>
+                            User
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
                     </a>
-                    <ul class="sidebar-submenu collapse show" id="maintenance_user">
-                        <li class="sidebar-menu-item {{ request()->is('user/registration') ? 'active' : '' }}">
-                            <a class="sidebar-menu-button" href="{{ route('user.registration') }}">
-                                <span class="sidebar-menu-text">Registration</span>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('user.index') }}" class="nav-link {{ request()->is('user') || request()->is('user/create')  ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>List</p>
                             </a>
                         </li>
-                        <li class="sidebar-menu-item {{ request()->is('user/role') ? 'active' : '' }} ">
-                            <a class="sidebar-menu-button" href="{{ route('user.role') }}">
-                                <span class="sidebar-menu-text">Role</span>
+                        <li class="nav-item">
+                            <a href="{{ route('user.role.index') }}" class="nav-link {{ request()->is('user/role') ? 'active' : '' }}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Role</p>
                             </a>
                         </li>
                     </ul>
                 </li>
             </ul>
-        </div>
+        </nav>
     </div>
-</div>
+</aside>

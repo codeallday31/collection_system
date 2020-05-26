@@ -1,45 +1,34 @@
-<div id="header" class="mdk-header js-mdk-header m-0" data-fixed>
-    <div class="mdk-header__content">
-        <div class="navbar navbar-expand-sm navbar-main navbar-light bg-light  pr-0" id="navbar" data-primary>
-            <div class="container-fluid p-0">
+<nav class="main-header navbar navbar-expand navbar-light">
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        </li>
+    </ul>
 
-                <!-- Navbar toggler -->
-                <button class="navbar-toggler navbar-toggler-right d-block d-md-none" type="button" data-toggle="sidebar">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-        
-                <!-- Navbar Brand -->
-                <a href="index.html" class="navbar-brand ">
-                    <img class="navbar-brand-icon" src="{{ asset('img/cam.jpg') }}" width="40%" alt="LOGO CAM">
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item dropdown">
+            <a class="nav-link" data-toggle="dropdown" href="#">
+                <i class="far fa-user-circle" style="font-size: 1.5rem"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                <span class="dropdown-header">Settings</span>
+                <div class="dropdown-divider"></div>
+                <a 
+                    class="dropdown-item"
+                    href=" {{route('logout')}} " 
+                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                >
+                    <i class="fas fa-sign-out-alt mr-2"></i> Logout
                 </a>
 
-                <!-- User -->
-                <ul class="nav navbar-nav d-none d-sm-flex border-left navbar-height align-items-center">
-                    <li class="nav-item dropdown">
-                        <a href="#account_menu" class="nav-link dropdown-toggle" data-toggle="dropdown" data-caret="false">
-                            <img src="assets/images/avatar/demi.png" class="rounded-circle" width="32" alt="Frontted">
-                            <span class="ml-1 d-flex-inline">
-                                <span class="text-light">Adrian D.</span>
-                            </span>
-                        </a>
-                        <div id="account_menu" class="dropdown-menu dropdown-menu-right">
-                            <a 
-                                class="dropdown-item"
-                                href=" {{route('logout')}} " 
-                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
-                            >
-                                Logout
-                            </a>
-    
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                @csrf
-                            </form>
-                        </div>
-                    </li>
-                </ul>
-
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
             </div>
-        </div>
-
-    </div>
-</div>
+        </li>
+        {{-- <li class="nav-item">
+            <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button"><i
+            class="fas fa-th-large"></i></a>
+        </li> --}}
+    </ul>
+</nav>

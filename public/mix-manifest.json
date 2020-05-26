@@ -1,4 +1,8 @@
 {
-    "/js/app.js": "/js/app.js",
-    "/css/app.css": "/css/app.css"
+    "/js/app.js": "/js/app.js?id=01f1b45e72bbf9560193",
+    "/css/app.css": "/css/app.css?id=2f6c989885b152cd133d",
+    "/css/adminLTE/main.css": "/css/adminLTE/main.css?id=c97767f0bbd86b344ae0",
+    "/css/datatable/dataTable.css": "/css/datatable/dataTable.css?id=9ade3b9ce71a2c736c90",
+    "/js/adminLTE/main.js": "/js/adminLTE/main.js?id=9b84f753d1900d72ca75",
+    "/js/datatable/dataTable.js": "/js/datatable/dataTable.js?id=e95dfc5386c2fd0d3e91"
 }

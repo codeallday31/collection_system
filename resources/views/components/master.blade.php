@@ -1,56 +1,28 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html>
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>CAM</title>
+        <!-- Tell the browser to be responsive to screen width -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <!-- Prevent the demo from appearing in search engines -->
-        <meta name="robots" content="noindex">
-
-        <!-- Simplebar -->
-        <link type="text/css" href="{{ asset('assets/vendor/simplebar.min.css')}}" rel="stylesheet">
-
-        <!-- App CSS -->
-        <link type="text/css" href="{{ asset('assets/css/app.css') }}" rel="stylesheet">
-        <link type="text/css" href="{{ asset('assets/css/app.rtl.css') }}" rel="stylesheet">
-
-        <!-- Material Design Icons -->
-        <link type="text/css" href="{{ asset('assets/css/vendor-material-icons.css') }}" rel="stylesheet">
-        <link type="text/css" href="{{ asset('assets/css/vendor-material-icons.rtl.css') }}" rel="stylesheet">
-
-        <!-- Font Awesome FREE Icons -->
-        <link type="text/css" href="{{ asset('assets/css/vendor-fontawesome-free.css') }} " rel="stylesheet">
-        <link type="text/css" href="{{ asset('assets/css/vendor-fontawesome-free.rtl.css') }}" rel="stylesheet">
-        @yield('customCss')
+        <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css')}}">
+        <link rel="stylesheet" href="{{ asset('plugins/toastr/toastr.min.css')}}">
+        <link rel="stylesheet" href="{{ mix('css/datatable/dataTable.css') }}">
+        <link rel="stylesheet" href="{{ mix('css/adminLTE/main.css')}}">
+        @yield('customcss')
+        
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     </head>
+    <body class="{{ $bodyClass }}">
 
-    <body class=" {{ $bodyClass }} ">
         {{ $slot }}
-        <!-- jQuery -->
-        <script src="{{ asset('assets/vendor/jquery.min.js') }}"></script>
 
-        <!-- Bootstrap -->
-        <script src="{{ asset('assets/vendor/popper.min.js') }}"></script>
-        <script src="{{ asset('assets/vendor/bootstrap.min.js') }}"></script>
-
-        <!-- Simplebar -->
-        <script src="{{ asset('assets/vendor/simplebar.min.js') }}"></script>
-
-        <!-- DOM Factory -->
-        <script src="{{ asset('assets/vendor/dom-factory.js') }}"></script>
-
-        <!-- MDK -->
-        <script src="{{ asset('assets/vendor/material-design-kit.js') }}"></script>
-
-        <!-- App -->
-        <script src="{{ asset('assets/js/toggle-check-all.js')}}"></script>
-        <script src="{{ asset('assets/js/check-selected-row.js')}}"></script>
-        <script src="{{ asset('assets/js/dropdown.js')}}"></script>
-        <script src="{{ asset('assets/js/sidebar-mini.js')}}"></script>
-        <script src="{{ asset('assets/js/app.js')}}"></script>
-        @yield('customScript')
-
+        <script src="{{ mix('js/app.js') }}"></script>
+        <script src="{{ asset('plugins/toastr/toastr.min.js') }}"></script>
+        <script src="{{ mix('js/datatable/dataTable.js') }}"></script>
+        <script src="{{ mix('js/adminLTE/main.js') }}"></script>
+        @yield('customscript')
     </body>
 </html>
