@@ -20,7 +20,22 @@ use Illuminate\Support\Facades\Auth;
 Route::middleware('auth')->group(function(){
 
     Route::get('/', function () {
-        return view('admin/index');
+        return view('index');
+    })->name('homepage');
+    
+    Route::prefix('user')->group(function () {
+        Route::name('user.')->group(function () {
+
+            Route::get('/', 'UserController@index')->name('index');
+            Route::get('/create', 'UserController@create')->name('create');
+            Route::post('/create', 'UserController@store')->name('store');
+            
+
+
+            Route::get('role', function () {
+                return view('user.role.index');
+            })->name('role.index');
+        });
     });
 
 });
