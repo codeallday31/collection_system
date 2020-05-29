@@ -16,25 +16,45 @@ use Illuminate\Support\Facades\Auth;
 // Route::get('/login', function () {
 //     return view('auth.login');
 // });
-
 Route::middleware('auth')->group(function(){
 
     Route::get('/', function () {
         return view('index');
     })->name('homepage');
     
-    Route::prefix('user')->group(function () {
-        Route::name('user.')->group(function () {
-
+    Route::prefix('user')->group(function() {
+        Route::name('user.')->group(function() {
             Route::get('/', 'UserController@index')->name('index');
             Route::get('/create', 'UserController@create')->name('create');
             Route::post('/create', 'UserController@store')->name('store');
-            
-
-
+        
             Route::get('role', function () {
                 return view('user.role.index');
             })->name('role.index');
+        });
+    });
+
+    Route::prefix('billing')->group(function() {
+        Route::name('billing.')->group(function() {
+            Route::get('/', 'BillingController@index')->name('index');
+            Route::get('/create', 'BillingController@create')->name('create');
+        });
+    });
+
+    Route::prefix('item')->group(function() {
+        Route::name('item.category.')->group(function(){  
+            Route::get('/category', 'ItemCategoryController@index')->name('index');
+            Route::get('/category/create', 'ItemCategoryController@create')->name('create');
+            Route::post('/category/create', 'ItemCategoryController@store')->name('store');
+            Route::get('/category/{id}/edit', 'ItemCategoryController@edit')->name('edit');
+            Route::patch('/category/{id}', 'ItemCategoryController@update')->name('update');
+            Route::delete('/category/{id}', 'ItemCategoryController@destroy')->name('destroy');
+        });
+    });
+
+    Route::prefix('payable')->group(function() {
+        Route::name('payable.')->group(function() {
+            Route::get('/', 'PayableController@index')->name('index');
         });
     });
 

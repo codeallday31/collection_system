@@ -1,7 +1,7 @@
 <aside class="main-sidebar elevation-2 sidebar-light-primary">
     <!-- Brand Logo -->
     <a href="{{ route('homepage') }}" class="brand-link navbar-secondary">
-      {{-- <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+      {{-- <img src="{{ asset('storage/images/cam.jpg')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8"> --}}
       <span class="brand-text font-weight-light">AdminLTE 3</span>
     </a>
@@ -33,6 +33,14 @@
                     </a>
                 </li>
                 <li class="nav-header text-uppercase">Transactions</li>
+                <li class="nav-item">
+                    <a href="{{ route('billing.index') }}" class="nav-link {{ request()->is('billing') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-file-invoice-dollar"></i>
+                        <p>
+                            Billing
+                        </p>
+                    </a>
+                </li>
                 <li class="nav-header text-uppercase">Reports</li>
                 <li class="nav-header text-uppercase">Maintenance</li>
                 <li class="nav-item has-treeview {{ request()->is('user/*') || request()->is('user') ? 'menu-open' : '' }}">
@@ -45,7 +53,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{ route('user.index') }}" class="nav-link {{ request()->is('user') || request()->is('user/create')  ? 'active' : '' }}">
+                            <a href="{{ route('user.index') }}" class="nav-link {{ request()->is('user') || request()->is('user/*')  ? 'active' : '' }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>List</p>
                             </a>
@@ -57,6 +65,45 @@
                             </a>
                         </li>
                     </ul>
+                </li>
+                <li class="nav-item has-treeview {{ request()->is('item/*') ? 'menu-open' : '' }}">
+                    <a href="#" class="nav-link {{ request()->is('item/*') ?  'active' : '' }}">
+                        <i class="nav-icon fas fa-box"></i>
+                        <p>
+                            Item
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item {{ request()->is('item/category/*') ? 'has-treeview menu-open' : '' }}">
+                            <a href="{{ route('item.category.index') }}" class="nav-link {{ request()->is('item/category') || request()->is('item/category/*')  ? 'active' : '' }}">
+                                <i class="fas fa-clipboard-list nav-icon"></i>
+                                <p>Category</p>
+                                @if(request()->is('item/category/*'))
+                                    <i class="right fas fa-angle-left"></i>
+                                @endif
+                            </a>
+                            @if(request()->is('item/category/*'))
+                                
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <span href="#" class="d-block nav-link">
+                                            <i class="far fa-dot-circle nav-icon"></i>
+                                            <p class="text-capitalize">{{ request()->segment(4) ?? request()->segment(3) }}</p>
+                                        </span>
+                                    </li>
+                                </ul>
+                            @endif
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('payable.index') }}" class="nav-link {{ request()->is('payable')  || request()->is('payable/*') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-exchange-alt"></i>
+                        <p>
+                            Payable
+                        </p>
+                    </a>
                 </li>
             </ul>
         </nav>

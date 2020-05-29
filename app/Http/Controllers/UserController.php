@@ -11,7 +11,7 @@ class UserController extends Controller
     
     public function index()
     {
-        $users = User::paginate(50);
+        $users = User::paginate(50)->except(currentUser()->id);
 
         return view('user.index', compact('users'));
     }
