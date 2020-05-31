@@ -97,13 +97,26 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item {{ request()->is('payable/*') ? 'has-treeview menu-open' : '' }}">
                     <a href="{{ route('payable.index') }}" class="nav-link {{ request()->is('payable')  || request()->is('payable/*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-exchange-alt"></i>
                         <p>
                             Payable
+                            @if(request()->is('payable/*'))
+                                <i class="right fas fa-angle-left"></i>
+                            @endif
                         </p>
                     </a>
+                    @if (request()->is('payable/*'))
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <span href="#" class="d-block nav-link">
+                                    <i class="far fa-dot-circle nav-icon"></i>
+                                    <p class="text-capitalize">{{ request()->segment(3) ?? request()->segment(2) }}</p>
+                                </span>
+                            </li>
+                        </ul>
+                    @endif
                 </li>
             </ul>
         </nav>

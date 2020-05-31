@@ -13,14 +13,16 @@
                             </a>
                         </li>
                     @endif
-                    <li class="breadcrumb-item text-capitalize">
+                    <li class="breadcrumb-item text-capitalize {{ isset($breadCrumbPage) ? '' : 'active' }}">
                         @if($menu->toHtml() === 'home')
                             <a href="{{ route('homepage') }}">{{ $menu ?? '' }}</a>
                         @else
                             {{ $menu ?? '' }}
                         @endif
                     </li>
-                    <li class="breadcrumb-item text-capitalize active"> {{ $breadCrumbPage ?? '' }} </li>
+                    @if (isset($breadCrumbPage))
+                        <li class="breadcrumb-item text-capitalize active"> {{ $breadCrumbPage }} </li>
+                    @endif
                 </ol>
             </div>
         </div>

@@ -1,8 +1,7 @@
 <x-app>
     <x-page-header>
-        <x-slot name="menu"> item </x-slot>
-        <x-slot name="currentPage"> Categories </x-slot>
-        <x-slot name="breadCrumbPage"> category </x-slot>
+        <x-slot name="menu"> Payable </x-slot>
+        <x-slot name="currentPage"> Payables </x-slot>
     </x-page-header>
     
     <x-page-body>
@@ -12,7 +11,7 @@
                     <div class="card-header d-flex align-items-center">
                         <h3 class="card-title text-uppercase">&nbsp;</h3>
                         <div class="ml-auto">
-                            <a href="{{ route('item.category.create') }}" type="button" class="btn btn-block bg-success btn-sm">
+                            <a href="{{ route('payable.create') }}" type="button" class="btn btn-block bg-success btn-sm">
                                 <i class="fas fa-plus d-inline-block mr-2"></i>Create
                             </a>
                         </div>
@@ -27,19 +26,24 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($itemCategories as $itemCategory)
+                                @foreach ($payables as $payable)
                                     <tr>
-                                        <td> {{ $itemCategory->id }} </td>
-                                        <td> {{ $itemCategory->name }} </td>
+                                        <td>{{ $payable->id }}</td>
+                                        <td>{{ $payable->name }}</td>
                                         <td class="text-center" style="width: 10%">
-                                            <a href="{{ route('item.category.edit', $itemCategory->id) }}" class="btn btn-info btn-sm" role="button" aria-disabled="true">
+                                            <a href="{{ route('payable.edit', $payable->id) }}" class="btn btn-info btn-sm" role="button" aria-disabled="true">
                                                 <i class="fas fa-edit"></i>
                                             </a>
-                                            <button class="btn btn-danger btn-sm btn-delete" type="button" data-category-id="{{ $itemCategory->id }}">
-                                                <i class="fas fa-trash-alt"></i>
-                                            </button>
+                                            <form action="{{ route('payable.destroy', $payable->id) }}" method="POST" class="d-inline-block">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="btn btn-danger btn-sm btn-delete" type="button">
+                                                    <i class="fas fa-trash-alt"></i>
+                                                </button>
+                                            </form>
+                                       
                                         </td>
-                                    </tr>   
+                                    </tr>
                                 @endforeach
                             </tbody>
                         </table>
@@ -55,16 +59,12 @@
     <script>
          $(document).ready(function(){
             $('#dataTable').dataTable();
-
             actionNotifier() 
         });
 
-        $('.btn-delete').on('click', function(){
-            var categoryID = $(this).data('category-id');
-            var url = "{{ route('item.category.destroy', ':id') }}"
-                url = url.replace(':id', categoryID);
-                
-            Swal.fire({
+        $('.btn-delete').on('click', function() {
+            var formElement = $(this).parent();
+             Swal.fire({
                 title: 'Are you sure?',
                 text: "You won't be able to revert this!",
                 icon: 'warning',
@@ -72,34 +72,12 @@
                 confirmButtonColor: '#d33',
                 cancelButtonColor: '#3085d6',
                 confirmButtonText: 'Yes, delete it!'
-                })
-                .then(function(result) {
-                    if (result.value) {
-                        $.ajax({
-                            url : url,
-                            method: 'DELETE',
-                            data: {
-                                "categoryId": categoryID,
-                            }
-                        })
-                        .done(function(response) {
-                           if (response.status === 200) {
-                                Swal.fire({
-                                    title: 'Category deleted',
-                                    text: response.message,
-                                    icon: 'success',
-                                }).then(function(res) {
-                                    if (res.isConfirmed || res.isDismissed) window.location.href = "{{route('item.category.index')}}";
-                                })
-                           }else{
-                               console.log(response);
-                           }
-                        })
-                        .fail(function(error) {
-                            console.log(error)
-                        })
-                    }
-                });
+            })
+            .then(function (result) {
+                if (result.value) {
+                    formElement.submit();
+                }
+            });
         });
 
         function actionNotifier() {
