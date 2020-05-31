@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\ItemCategory;
 use App\Http\Requests\ItemCategory as RequestsItemCategory;
-use Illuminate\Http\Request;
 
 class ItemCategoryController extends Controller
 {
@@ -34,14 +33,14 @@ class ItemCategoryController extends Controller
 
     public function edit(ItemCategory $itemCategory)
     {
-        $category = $itemCategory->findOrFail(request()->id);
+        $category = $itemCategory->findOrFail(request()->category);
       
         return view('item.category.edit', compact('category'));
     }
 
     public function update(ItemCategory $itemCategory, RequestsItemCategory $request) {
 
-        $itemCategory->findOrFail($request->id)
+        $itemCategory->findOrFail($request->category)
                     ->update($request->all());
 
         $notification = array(
@@ -54,7 +53,7 @@ class ItemCategoryController extends Controller
 
     public function destroy(ItemCategory $itemCategory)
     {
-        $category = $itemCategory->findOrFail(request('id'));
+        $category = $itemCategory->findOrFail(request('categoryId'));
         
         $isDeleted = $category->delete();
 
