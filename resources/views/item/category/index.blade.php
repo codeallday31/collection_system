@@ -18,7 +18,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <table id="dataTable" class="table table-bordered table-hover">
+                        <table id="dataTable" class="table table-bordered table-striped table-md">
                             <thead>
                                 <tr>
                                     <th>Id</th>
@@ -48,7 +48,14 @@
             </div>
         </div>
     </x-page-body>
-    
+    @section('customcss')
+        <style>
+            .table-md th,
+            .table-md td  {
+                padding: 0.5rem;
+            }
+        </style>
+    @endsection
     @section('customscript')
     <script>
          $(document).ready(function(){
@@ -78,7 +85,6 @@
                             method: 'DELETE',
                             data: {
                                 "categoryId": categoryID,
-                                "_method": 'DELETE',
                             }
                         })
                         .done(function(response) {

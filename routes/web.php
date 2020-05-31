@@ -41,15 +41,9 @@ Route::middleware('auth')->group(function(){
         });
     });
 
-    Route::prefix('item')->group(function() {
-        Route::name('item.category.')->group(function(){  
-            Route::get('/category', 'ItemCategoryController@index')->name('index');
-            Route::get('/category/create', 'ItemCategoryController@create')->name('create');
-            Route::post('/category/create', 'ItemCategoryController@store')->name('store');
-            Route::get('/category/{id}/edit', 'ItemCategoryController@edit')->name('edit');
-            Route::patch('/category/{id}', 'ItemCategoryController@update')->name('update');
-            Route::delete('/category/{id}', 'ItemCategoryController@destroy')->name('destroy');
-        });
+
+    Route::group(['prefix' => 'item', 'as' => 'item.'] , function () {
+        Route::resource('category', 'ItemCategoryController')->except('show');
     });
 
     Route::prefix('payable')->group(function() {
