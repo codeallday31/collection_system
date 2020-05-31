@@ -14,7 +14,8 @@ const mix = require('laravel-mix');
 mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css')
     .styles("node_modules/admin-lte/dist/css/adminlte.min.css", "public/css/adminLTE/main.css")
-    .scripts("node_modules/admin-lte/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css", "public/css/sweetalert2/sweetalert.css")
+    .styles("resources/css/custom.css", 'public/css/custom.css')
+    .styles("node_modules/admin-lte/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css", "public/css/sweetalert2/sweetalert.css")
     .styles(
         [
             "node_modules/admin-lte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css",
