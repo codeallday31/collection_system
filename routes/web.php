@@ -46,14 +46,8 @@ Route::middleware('auth')->group(function(){
         Route::resource('category', 'ItemCategoryController')->except('show');
     });
 
+    Route::resource('client', 'ClientController')->except('show');
     Route::resource('payable', 'PayableController')->except('show');
-
-    Route::prefix('payable')->group(function() {
-        Route::name('payable.')->group(function() {
-            Route::get('/', 'PayableController@index')->name('index');
-        });
-    });
-
 });
 
 Auth::routes([

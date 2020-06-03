@@ -1,7 +1,7 @@
 <div class="form-group">
     <label for="name" id="nameHelpLine">
         Name
-        <small id="nameHelpLine" class="d-inline text-danger h6" aria-describedby="emailHelpline">*</small>
+        <small id="nameHelpLine" class="d-inline text-danger h6">*</small>
     </label>
     <input 
         type="text" 

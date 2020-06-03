@@ -118,6 +118,27 @@
                         </ul>
                     @endif
                 </li>
+                 <li class="nav-item {{ request()->is('client/*') ? 'has-treeview menu-open' : '' }}">
+                    <a href="{{ route('client.index') }}" class="nav-link {{ request()->is('client')  || request()->is('client/*') ? 'active' : '' }}">
+                        <i class="nav-icon fas fa-user-tag"></i>
+                        <p>
+                            Client
+                            @if(request()->is('payable/*'))
+                                <i class="right fas fa-angle-left"></i>
+                            @endif
+                        </p>
+                    </a>
+                    @if (request()->is('client/*'))
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <span href="#" class="d-block nav-link">
+                                    <i class="far fa-dot-circle nav-icon"></i>
+                                    <p class="text-capitalize">{{ request()->segment(3) ?? request()->segment(2) }}</p>
+                                </span>
+                            </li>
+                        </ul>
+                    @endif
+                </li>
             </ul>
         </nav>
     </div>
