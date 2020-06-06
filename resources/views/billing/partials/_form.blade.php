@@ -15,15 +15,15 @@
                     </label>
                     <select 
                         name="client_id" 
-                        
                         id="client_id" 
                         class="select2 form-control  
                         @error('client_id') {{ 'is-invalid' }} @enderror"
+                        required 
                     >
                         @if ($clients->count() > 0)
                             <option value="">Select Client</option>
                             @foreach ($clients as $id => $name)
-                                <option value="{{ $id }}" {{ (int)old('client_id') === $id ? 'selected' : '' }} > {{ ucfirst($name) }}</option>
+                                <option value="{{ $id }}" {{ (int)old('client_id',  isset($billing->client_id) ? $billing->client_id : null) === $id ? 'selected' : '' }} > {{ ucfirst($name) }}</option>
                             @endforeach
                         @endif
                     </select>
@@ -45,7 +45,8 @@
                         class="form-control  @error('billing_no') {{ 'is-invalid' }} @enderror"
                         id="billing_no"
                         name="billing_no"
-                        value="{{ old('billing_no') }}"
+                        value="{{ old('billing_no', isset($billing) ? $billing->billing_no : null) }}"
+                        required
                        
                     >
                     @error('billing_no')
@@ -66,7 +67,8 @@
                         id="description" 
                         rows="4"
                         class="form-control  @error('description') {{ 'is-invalid' }} @enderror"
-                    >{{ old('description') }}</textarea>
+                        required
+                    >{{ old('description', isset($billing) ? $billing->description : null) }}</textarea>
                     @error('description')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -77,100 +79,108 @@
         </div>
     </div>
 </div>
-<div class="row">
-    <div class="card card-success card-outline col-md-12 pl-0 pr-0">
-        <div class="card-header d-flex align-items-center">
-            <h3 class="card-title font-weight-bold text-uppercase text-uppercase">Billing Items</h3>
-            <div class="ml-auto">
-                <button type="button" class="bg-primary btn btn-sm add-billing-item">
-                    <i class="fas fa-plus"></i>
-                </button>
+
+@if (!isset($isEdit))
+    <div class="row">
+        <div class="card card-success card-outline col-md-12 pl-0 pr-0">
+            <div class="card-header d-flex align-items-center">
+                <h3 class="card-title font-weight-bold text-uppercase text-uppercase">Billing Items</h3>
+                <div class="ml-auto">
+                    <button type="button" class="bg-primary btn btn-sm add-billing-item">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body p-0 table-responsive">
+                <table class="table table-bordered table-billing-item">
+                    <thead>
+                        <thead>
+                            <tr >
+                                <th width="5%"></th>
+                                <th width="23.75%" class="font-weight-normal @error('billing_items.*.category_id') {{'table-danger'}} @enderror">
+                                    Item name
+                                    <small class="d-inline text-danger h6 font-weight-bold">*</small>
+                                </th>
+                                <th width="23.75%" class="font-weight-normal">Description</th>
+                                <th width="23.75%" class="font-weight-normal">Amount</th>
+                                <th width="23.75%" class="font-weight-normal @error('billing_items.*.account_id') {{'table-danger'}} @enderror">
+                                    Account Type
+                                    <small class="d-inline text-danger h6 font-weight-bold">*</small>
+                                </th>
+                            </tr>
+                        </thead>
+                    </thead>
+                    <tbody class="billing-input">
+                        @foreach (old('billing_items', ['']) as $key => $oldInputs)
+                            <tr>
+                                <td class="text-center pl-2">
+                                    <button type="button" class="bg-danger btn btn-sm remove-item">
+                                        <i class="far fa-minus-square"></i>
+                                    </button>
+                                </td>
+                                <td>
+                                    <select 
+                                        name="billing_items[{{ $loop->index }}][category_id]" 
+                                        class="select2 form-control form-control-sm 
+                                            @error('billing_items.'.$key.'.category_id')  {{ 'is-invalid' }} @enderror"
+                                        required
+                                    >
+                                    @if ($items->count() > 0)
+                                         <option value="">Select Item Category</option>
+                                            @foreach ($items as $id => $name)
+                                                <option value="{{ $id }}" 
+                                                    {{ old('billing_items.'.$key.'.category_id') == $id ? 'selected' : '' }}
+                                                > 
+                                                    {{$name}} 
+                                                </option>
+                                            @endforeach
+                                        @endif
+                                    </select>
+                                </td>
+                                <td>
+                                    <input 
+                                        type="text" 
+                                        name="billing_items[{{ $loop->index }}][description]" 
+                                        class="form-control form-control-sm"
+                                        value="{{ old('billing_items.'.$key.'.description') }}"
+                                    >
+                                </td>
+                                <td>
+                                    <input 
+                                        type="text" 
+                                        name="billing_items[{{ $loop->index }}][amount]" 
+                                        class="form-control form-control-sm"
+                                        value="{{ old('billing_items.'.$key.'.amount') }}"
+                                    >
+                                </td>
+                                <td style="padding-right: .75rem">
+                                    <select 
+                                        name="billing_items[{{ $loop->index }}][account_id]" 
+                                        class="select2 form-control form-control-sm
+                                             @error('billing_items.'.$key.'.account_id')  {{ 'is-invalid' }} @enderror"
+                                        required
+                                    >
+                                        @if ($accounts->count() > 0)
+                                             <option value="">Select Account type</option>
+                                            @foreach ($accounts as $id => $name)
+                                                <option value="{{ $id }}" 
+                                                    {{ old('billing_items.'.$key.'.account_id') == $id ? 'selected' : '' }}
+                                                > 
+                                                    {{$name}} 
+                                                </option>
+                                            @endforeach
+                                        @endif
+                                    </select>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
             </div>
         </div>
-        <div class="card-body p-0 table-responsive">
-            <table class="table table-bordered table-billing-item">
-                <thead>
-                    <thead>
-                        <tr >
-                            <th width="5%"></th>
-                            <th width="23.75%" class="font-weight-normal @error('billing_items.*.category_id') {{'table-danger'}} @enderror">
-                                Item name
-                                <small class="d-inline text-danger h6 font-weight-bold">*</small>
-                            </th>
-                            <th width="23.75%" class="font-weight-normal">Description</th>
-                            <th width="23.75%" class="font-weight-normal">Amount</th>
-                            <th width="23.75%" class="font-weight-normal @error('billing_items.*.account_id') {{'table-danger'}} @enderror">
-                                Account Type
-                                <small class="d-inline text-danger h6 font-weight-bold">*</small>
-                            </th>
-                        </tr>
-                    </thead>
-                </thead>
-                <tbody class="billing-input">
-                    @foreach (old('billing_items', ['']) as $key => $oldInputs)
-                        <tr>
-                            <td class="text-center pl-2">
-                                <button type="button" class="bg-danger btn btn-sm remove-item">
-                                    <i class="far fa-minus-square"></i>
-                                </button>
-                            </td>
-                            <td>
-                                <select 
-                                    name="billing_items[{{ $loop->index }}][category_id]" 
-                                    class="select2 form-control form-control-sm 
-                                        @error('billing_items.'.$key.'.category_id')  {{ 'is-invalid' }} @enderror"
-                                >
-                                @if ($items->count() > 0)
-                                     <option value="">Select Item Category</option>
-                                        @foreach ($items as $id => $name)
-                                            <option value="{{ $id }}" 
-                                                {{ old('billing_items.'.$key.'.category_id') == $id ? 'selected' : '' }}
-                                            > 
-                                                {{$name}} 
-                                            </option>
-                                        @endforeach
-                                    @endif
-                                </select>
-                            </td>
-                            <td>
-                                <input 
-                                    type="text" 
-                                    name="billing_items[{{ $loop->index }}][description]" 
-                                    class="form-control form-control-sm"
-                                    value="{{ old('billing_items.'.$key.'.description') }}"
-                                >
-                            </td>
-                            <td>
-                                <input 
-                                    type="text" 
-                                    name="billing_items[{{ $loop->index }}][amount]" 
-                                    class="form-control form-control-sm"
-                                    value="{{ old('billing_items.'.$key.'.amount') }}"
-                                >
-                            </td>
-                            <td style="padding-right: .75rem">
-                                <select 
-                                    name="billing_items[{{ $loop->index }}][account_id]" 
-                                    class="select2 form-control form-control-sm
-                                         @error('billing_items.'.$key.'.account_id')  {{ 'is-invalid' }} @enderror"
-                                >
-                                    @if ($accounts->count() > 0)
-                                         <option value="">Select Account type</option>
-                                        @foreach ($accounts as $id => $name)
-                                            <option value="{{ $id }}" 
-                                                {{ old('billing_items.'.$key.'.account_id') == $id ? 'selected' : '' }}
-                                            > 
-                                                {{$name}} 
-                                            </option>
-                                        @endforeach
-                                    @endif
-                                </select>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
     </div>
-</div>
-<button type="submit" class="btn btn-primary col-md-12 text-uppercase">Create</button>
+@endif
+
+<button type="submit" class="btn btn-primary btn-sm">
+    <i class="fas fa-{{ isset($isEdit) ? 'sync-alt' : 'save' }}"></i> {{ $isEdit ?? 'Save' }}
+</button>

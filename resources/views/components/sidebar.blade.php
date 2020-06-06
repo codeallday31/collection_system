@@ -51,7 +51,7 @@
                                 <span href="#" class="d-block nav-link">
                                     <i class="far fa-dot-circle nav-icon"></i>
                                     <p class="text-capitalize">
-                                        {{ request()->segment(3) ?? request()->segment(2) === 'create' ? request()->segment(2) : 'Information' }}</p>
+                                        {{ request()->segment(3) ?? (request()->segment(2) === 'create' ? request()->segment(2) : 'Information') }}</p>
                                 </span>
                             </li>
                         </ul>

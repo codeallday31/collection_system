@@ -49,4 +49,17 @@ class BillingController extends Controller
     {
         return view('billing.show', compact('billing'));
     }
+
+    public function edit(Billing $billing)
+    {
+        $clients = Client::all()->pluck('name', 'id');
+        return view('billing.edit', compact('billing','clients'));
+    }
+
+    public function update(BillingRequest $request, Billing $billing)
+    {
+        $billing->update($request->all());
+
+        return redirect()->route('billing.index')->with(notificationMessage('info', 'Billing succesfully updated'));
+    }
 }

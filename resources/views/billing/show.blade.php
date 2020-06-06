@@ -42,6 +42,9 @@
                         <a href="{{ route('billing.index') }}" type="button" class="btn bg-secondary btn-sm">
                             <i class="fas fa-arrow-left d-inline-block mr-2"></i>Back
                         </a>
+                        <a href="{{ route('billing.edit', $billing->id) }}" class="btn btn-info btn-sm float-right d-inline-block" role="button" aria-disabled="true">
+                            <i class="fas fa-edit"></i> Edit
+                        </a>
                     </div>
                 </div>
             </div>
