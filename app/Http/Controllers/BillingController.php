@@ -43,4 +43,9 @@ class BillingController extends Controller
         });
         return redirect()->route('billing.index')->with(notificationMessage('success', 'Billing Successfully created'));
     }
+
+    public function show(Billing $billing)
+    {
+        return view('billing.show', compact('billing'));
+    }
 }

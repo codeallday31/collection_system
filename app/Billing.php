@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Item;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Billing extends Model
@@ -19,5 +20,10 @@ class Billing extends Model
     public function client()
     {
     	return $this->belongsTo(Client::class);
+    }
+
+    public function getCreatedAtAttribute($date)
+    {
+        return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('F d, Y');
     }
 }

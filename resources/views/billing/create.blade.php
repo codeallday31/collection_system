@@ -3,7 +3,7 @@
         <x-slot name="menu"> billing </x-slot>
         <x-slot name="currentPage"> Create new billing </x-slot>
         <x-slot name="breadCrumbPage"> create </x-slot>
-        <a href=" {{ route('user.index') }} " class="btn btn-secondary ml-3"> 
+        <a href=" {{ route('billing.index') }} " class="btn btn-secondary ml-3"> 
             <i class="material-icons">arrow_back</i>
             Back
         </a>

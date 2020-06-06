@@ -1,7 +1,7 @@
 <x-app>
     <x-page-header>
         <x-slot name="menu"> billing </x-slot>
-        <x-slot name="currentPage"> Billing Transactions </x-slot>
+        <x-slot name="currentPage"> Billings </x-slot>
     </x-page-header>
     
     <x-page-body>
@@ -49,7 +49,14 @@
     <script>
         
          $(document).ready(function(){
-            $('#dataTable').dataTable();
+              var table = $('#dataTable').DataTable();
+     
+                $('#dataTable tbody').on('click', 'tr', function () {
+                    var data = table.row( this ).data();
+                    var url = "{{ route('billing.show', ':id') }}";
+                        url = url.replace(':id', data[0]);
+                    window.location.href = url;
+                });
 
             if ("{{session()->has('message')}}") {
                 toastr.options = {
