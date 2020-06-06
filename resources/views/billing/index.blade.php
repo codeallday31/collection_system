@@ -29,10 +29,10 @@
                             <tbody>
                                 @foreach ($billings as $billing)
                                     <tr>
-                                        <td>{{ $billing->id }}</td>
-                                        <td>{{ $billing->billing_no }}</td>
-                                        <td>{{ $billing->description }}</td>
-                                        <td>{{ $billing->client->name }}</td>
+                                        <td width="5%">{{ $billing->id }}</td>
+                                        <td width="15%">{{ $billing->billing_no }}</td>
+                                        <td width="31.5%">{{ $billing->description }}</td>
+                                        <td width="15.5%">{{ $billing->client->name }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
