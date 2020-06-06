@@ -55,7 +55,9 @@
                     $('select.select2').select2('destroy');
                     var $newTableRow = $tableBody.find('tr:last').clone();
                     $newTableRow.find('td:nth-of-type(2) select').prop({
-                       name: 'billing_items['+$tbodyTrLength+'][category_id]',
+                        name: 'billing_items['+$tbodyTrLength+'][category_id]',
+                        class: 'select2 form-control form-control-sm',
+                        val: ''
                     });
                     $newTableRow.find('td:nth-of-type(3) input[type="text"]').prop({
                         name: 'billing_items['+$tbodyTrLength+'][description]',
@@ -66,7 +68,8 @@
                         value: ''
                     });
                      $newTableRow.find('td:nth-of-type(5) select').prop({
-                       name: 'billing_items['+$tbodyTrLength+'][account_id]',
+                        name: 'billing_items['+$tbodyTrLength+'][account_id]',
+                        class: 'select2 form-control form-control-sm'
                     });
 
                     $newTableRow.appendTo($tableBody).hide().fadeIn('fast');;

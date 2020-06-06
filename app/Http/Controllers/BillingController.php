@@ -14,7 +14,8 @@ class BillingController extends Controller
 {
     public function index()
     {
-        $billings = Billing::all();
+        $billings = Billing::latest()->get();
+        
         return view('billing.index', compact('billings'));
     }
 

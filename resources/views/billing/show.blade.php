@@ -2,10 +2,6 @@
     <x-page-header>
         <x-slot name="menu"> billing </x-slot>
         <x-slot name="currentPage"> Billing No: <strong>{{ $billing->billing_no }}</strong> </x-slot>
-        <a href=" {{ route('billing.index') }} " class="btn btn-secondary ml-3"> 
-            <i class="material-icons">arrow_back</i>
-            Back
-        </a>
     </x-page-header>
 
     <x-page-body>
@@ -19,7 +15,7 @@
                         </div>
                     </div>
                     <div class="card-body pt-2 pb-0">
-                        <ul class="list-group list-group-unbordered mb-3">
+                        <ul class="list-group list-group-unbordered">
                             <li class="list-group-item border-top-0">
                                 <span class="text-uppercase font-weight-bold">Client Name</span>
                                 <span class="float-right">
@@ -33,14 +29,19 @@
                                 </span>
                             </li>
                             <li class="list-group-item border-bottom-0">
-                                <div class="border border-top-0 border-left-0 border-right-0 pb-2">
+                                <div class="pb-2">
                                    <span class="d-inline-block mb-2 text-uppercase font-weight-bold"> Description</span>
-                                    <p class="text-justify" style="text-indent: 5%">
+                                    <p class="text-justify mb-1" style="text-indent: 5%">
                                         {!! $billing->description !!}
                                     </p>
                                 </div>
                             </li>
                         </ul>
+                    </div>
+                    <div class="card-footer" style="border: 1px solid #ededed">
+                        <a href="{{ route('billing.index') }}" type="button" class="btn bg-secondary btn-sm">
+                            <i class="fas fa-arrow-left d-inline-block mr-2"></i>Back
+                        </a>
                     </div>
                 </div>
             </div>
