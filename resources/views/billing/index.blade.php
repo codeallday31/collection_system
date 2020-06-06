@@ -49,7 +49,9 @@
     <script>
         
          $(document).ready(function(){
-              var table = $('#dataTable').DataTable();
+              var table = $('#dataTable').DataTable({
+                "aaSorting": []
+              });
      
                 $('#dataTable tbody').on('click', 'tr', function () {
                     var data = table.row( this ).data();
