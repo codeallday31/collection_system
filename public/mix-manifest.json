@@ -5,7 +5,9 @@
     "/css/custom.css": "/css/custom.css?id=95633980ce6cdaaf1d55",
     "/css/sweetalert2/sweetalert.css": "/css/sweetalert2/sweetalert.css?id=bcab1c9a93cbc1b5996e",
     "/css/datatable/dataTable.css": "/css/datatable/dataTable.css?id=9ade3b9ce71a2c736c90",
+    "/css/select2/select2.css": "/css/select2/select2.css?id=9f54e6414f87e0d14b9e",
     "/js/adminLTE/main.js": "/js/adminLTE/main.js?id=9b84f753d1900d72ca75",
     "/js/datatable/dataTable.js": "/js/datatable/dataTable.js?id=e95dfc5386c2fd0d3e91",
-    "/js/sweetalert2/sweetalert.js": "/js/sweetalert2/sweetalert.js?id=51e2db2910a1929c0d85"
+    "/js/sweetalert2/sweetalert.js": "/js/sweetalert2/sweetalert.js?id=51e2db2910a1929c0d85",
+    "/js/select2/select2.js": "/js/select2/select2.js?id=c28f3322ee526ec1325d"
 }

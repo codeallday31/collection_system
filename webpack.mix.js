@@ -23,6 +23,7 @@ mix.js('resources/js/app.js', 'public/js')
         ],
         "public/css/datatable/dataTable.css"
     )
+    .scripts("node_modules/admin-lte/plugins/select2/css/select2.min.css", "public/css/select2/select2.css")
     .scripts("node_modules/admin-lte/dist/js/adminlte.min.js", "public/js/adminLTE/main.js")
     .scripts(
         [
@@ -34,6 +35,7 @@ mix.js('resources/js/app.js', 'public/js')
         "public/js/datatable/dataTable.js"
     )
     .scripts("node_modules/admin-lte/plugins/sweetalert2/sweetalert2.all.min.js", "public/js/sweetalert2/sweetalert.js")
+    .scripts("node_modules/admin-lte/plugins/select2/js/select2.full.min.js", "public/js/select2/select2.js")
     // .copy("node_modules/admin-lte/plugins/fontawesome-free", "public/plugins/fontawesome-free")
     // .copy("node_modules/admin-lte/plugins/toastr", "public/plugins/toastr")
     

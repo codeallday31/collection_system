@@ -32,9 +32,9 @@
                                     <tr>
                                         <td>{{ $client->id }}</td>
                                         <td>{{ $client->name }}</td>
-                                        <td>{{ $client->address }}</td>
+                                        <td>{!! nl2br($client->address) !!}</td>
                                         <td>{{ $client->tin_no }}</td>
-                                        <td class="text-center" style="width: 10%">
+                                        <td class="text-center align-middle" style="width: 10%">
                                             <a href="{{ route('client.edit', $client->id) }}" class="btn btn-info btn-sm" role="button" aria-disabled="true">
                                                 <i class="fas fa-edit"></i>
                                             </a>

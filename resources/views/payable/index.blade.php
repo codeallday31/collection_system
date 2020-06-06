@@ -28,7 +28,7 @@
                             <tbody>
                                 @foreach ($payables as $payable)
                                     <tr>
-                                        <td>{{ $payable->id }}</td>
+                                        <td width="8%">{{ $payable->id }}</td>
                                         <td>{{ $payable->name }}</td>
                                         <td class="text-center" style="width: 10%">
                                             <a href="{{ route('payable.edit', $payable->id) }}" class="btn btn-info btn-sm" role="button" aria-disabled="true">

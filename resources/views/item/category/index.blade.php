@@ -29,7 +29,7 @@
                             <tbody>
                                 @foreach ($itemCategories as $itemCategory)
                                     <tr>
-                                        <td> {{ $itemCategory->id }} </td>
+                                        <td width="8%"> {{ $itemCategory->id }} </td>
                                         <td> {{ $itemCategory->name }} </td>
                                         <td class="text-center" style="width: 10%">
                                             <a href="{{ route('item.category.edit', $itemCategory->id) }}" class="btn btn-info btn-sm" role="button" aria-disabled="true">

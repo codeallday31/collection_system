@@ -37,6 +37,7 @@ class ClientController extends Controller
      */
     public function store(ClientRequest $request)
     {
+        Client::create($request->all());
         return redirect()->route('client.index')->with(notificationMessage('success', 'Client succesfully created'));
     }
 

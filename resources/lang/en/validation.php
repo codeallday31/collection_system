@@ -130,9 +130,15 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'client_id' => [
+            'required' => ':attribute field is required',
         ],
+        'billing_no' => [
+            'required' => ':attribute field is required',
+        ],
+        'description' => [
+            'required' => ':attribute field is required'
+        ]
     ],
 
     /*
@@ -146,6 +152,10 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'client_id' => 'Client',
+        'billing_no' => 'Billing No.',
+        'description' => 'Description'
+    ],
 
 ];

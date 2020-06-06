@@ -13,6 +13,7 @@
         <link rel="stylesheet" href="{{ asset('plugins/toastr/toastr.min.css')}}">
         <link rel="stylesheet" href="{{ mix('css/datatable/dataTable.css') }}">
         {{-- <link rel="stylesheet" href="{{ mix('css/sweetalert2/sweetalert.css') }}"> --}}
+        <link rel="stylesheet" href="{{ mix('css/select2/select2.css') }}">
         <link rel="stylesheet" href="{{ mix('css/adminLTE/main.css')}}">
         @yield('customcss')
         
@@ -25,6 +26,7 @@
         <script src="{{ mix('js/app.js') }}"></script>
         <script src="{{ asset('plugins/toastr/toastr.min.js') }}"></script>
         <script src="{{ mix('js/datatable/dataTable.js') }}"></script>
+        <script src="{{ mix('js/select2/select2.js') }}"></script>
         <script src="{{ mix('js/sweetalert2/sweetalert.js') }}"></script>
         <script src="{{ mix('js/adminLTE/main.js') }}"></script>
         <script>

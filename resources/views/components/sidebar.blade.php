@@ -33,13 +33,26 @@
                     </a>
                 </li>
                 <li class="nav-header text-uppercase">Transactions</li>
-                <li class="nav-item">
-                    <a href="{{ route('billing.index') }}" class="nav-link {{ request()->is('billing') ? 'active' : '' }}">
+                <li class="nav-item {{ request()->is('billing/*') ? 'has-treeview menu-open' : '' }}">
+                    <a href="{{ route('billing.index') }}" class="nav-link {{ request()->is('billing')  || request()->is('billing/*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-file-invoice-dollar"></i>
                         <p>
                             Billing
+                            @if(request()->is('payable/*'))
+                                <i class="right fas fa-angle-left"></i>
+                            @endif
                         </p>
                     </a>
+                    @if (request()->is('billing/*'))
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <span href="#" class="d-block nav-link">
+                                    <i class="far fa-dot-circle nav-icon"></i>
+                                    <p class="text-capitalize">{{ request()->segment(3) ?? request()->segment(2) }}</p>
+                                </span>
+                            </li>
+                        </ul>
+                    @endif
                 </li>
                 <li class="nav-header text-uppercase">Reports</li>
                 <li class="nav-header text-uppercase">Maintenance</li>
@@ -118,7 +131,7 @@
                         </ul>
                     @endif
                 </li>
-                 <li class="nav-item {{ request()->is('client/*') ? 'has-treeview menu-open' : '' }}">
+                <li class="nav-item {{ request()->is('client/*') ? 'has-treeview menu-open' : '' }}">
                     <a href="{{ route('client.index') }}" class="nav-link {{ request()->is('client')  || request()->is('client/*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-user-tag"></i>
                         <p>
