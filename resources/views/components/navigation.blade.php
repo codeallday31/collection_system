@@ -7,7 +7,8 @@
 
     <ul class="navbar-nav ml-auto">
         <li class="nav-item dropdown">
-            <a class="nav-link" data-toggle="dropdown" href="#">
+            <a class="nav-link d-flex align-items-center" data-toggle="dropdown" href="#">
+                <span class="d-inline-block mr-2">{{ currentUser()->name }}</span>
                 <i class="far fa-user-circle" style="font-size: 1.5rem"></i>
             </a>
             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">

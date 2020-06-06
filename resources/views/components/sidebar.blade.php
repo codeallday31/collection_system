@@ -1,9 +1,11 @@
 <aside class="main-sidebar elevation-2 sidebar-light-primary">
     <!-- Brand Logo -->
-    <a href="{{ route('homepage') }}" class="brand-link navbar-secondary">
-      {{-- <img src="{{ asset('storage/images/cam.jpg')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-           style="opacity: .8"> --}}
-      <span class="brand-text font-weight-light">AdminLTE 3</span>
+    <a href="{{ route('homepage') }}" class="brand-link">
+      <img src="{{ asset('storage/images/company-logo.jpg')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+           style="opacity: .8">
+      <span class="brand-text font-weight-light"> 
+            <span class="font-weight-bold">CAM </span>Accounting
+        </span>
     </a>
 
     <!-- Sidebar -->
