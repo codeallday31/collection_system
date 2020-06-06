@@ -1,7 +1,7 @@
 <x-app>
     <x-page-header>
-        <x-slot name="menu"> Payable </x-slot>
-        <x-slot name="currentPage"> Payables </x-slot>
+        <x-slot name="menu"> Account </x-slot>
+        <x-slot name="currentPage"> Accounts </x-slot>
     </x-page-header>
     
     <x-page-body>
@@ -11,7 +11,7 @@
                     <div class="card-header d-flex align-items-center">
                         <h3 class="card-title text-uppercase">&nbsp;</h3>
                         <div class="ml-auto">
-                            <a href="{{ route('payable.create') }}" type="button" class="btn btn-block bg-success btn-sm">
+                            <a href="{{ route('account.create') }}" type="button" class="btn btn-block bg-success btn-sm">
                                 <i class="fas fa-plus d-inline-block mr-2"></i>Create
                             </a>
                         </div>
@@ -26,15 +26,15 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($payables as $payable)
+                                @foreach ($accounts as $account)
                                     <tr>
-                                        <td width="8%">{{ $payable->id }}</td>
-                                        <td>{{ $payable->name }}</td>
+                                        <td width="8%">{{ $account->id }}</td>
+                                        <td>{{ $account->name }}</td>
                                         <td class="text-center" style="width: 10%">
-                                            <a href="{{ route('payable.edit', $payable->id) }}" class="btn btn-info btn-sm" role="button" aria-disabled="true">
+                                            <a href="{{ route('account.edit', $account->id) }}" class="btn btn-info btn-sm" role="button" aria-disabled="true">
                                                 <i class="fas fa-edit"></i>
                                             </a>
-                                            <form action="{{ route('payable.destroy', $payable->id) }}" method="POST" class="d-inline-block">
+                                            <form action="{{ route('account.destroy', $account->id) }}" method="POST" class="d-inline-block">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button class="btn btn-danger btn-sm btn-delete" type="button">

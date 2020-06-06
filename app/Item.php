@@ -2,14 +2,14 @@
 
 namespace App;
 
+use App\Account;
 use App\ItemCategory;
-use App\Payable;
 use Illuminate\Database\Eloquent\Model;
 
 class Item extends Model
 {
 	protected $fillable = [
-		'billing_id', 'category_id', 'payable_id', 'amount', 'description'
+		'billing_id', 'category_id', 'account_id', 'amount', 'description'
 	];
 
 	public function category()
@@ -17,8 +17,8 @@ class Item extends Model
 		return $this->belongsTo(ItemCategory::class, 'id');
 	}
 
-	public function payable()
+	public function account()
 	{
-		return $this->belongsTo(Payable::class);
+		return $this->belongsTo(Account::class);
 	}
 }

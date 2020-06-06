@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePayablesTable extends Migration
+class AddRelationshipAccountIdToItemsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreatePayablesTable extends Migration
      */
     public function up()
     {
-        Schema::create('payables', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->timestamps();
+        Schema::table('items', function (Blueprint $table) {
+            $table
+                ->foreignId('account_id')
+                ->constrained()
+                ->onDelete('cascade');
         });
     }
 
@@ -27,6 +28,8 @@ class CreatePayablesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('payables');
+        Schema::table('items', function (Blueprint $table) {
+            //
+        });
     }
 }

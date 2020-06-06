@@ -36,7 +36,7 @@ class BillingRequest extends FormRequest
             'billing_items.*.category_id' => [
                 'required'
             ],
-            'billing_items.*.payable_id' => [
+            'billing_items.*.account_id' => [
                 'required'
             ]
         ];

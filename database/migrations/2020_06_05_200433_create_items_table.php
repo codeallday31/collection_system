@@ -24,12 +24,7 @@ class CreateItemsTable extends Migration
                 ->references('id')
                 ->on('item_categories')
                 ->onDelete('cascade');
-                
-            $table
-                ->foreignId('payable_id')
-                ->constrained()
-                ->onDelete('cascade');
-                
+                                
             $table->text('description')->nullable();
             $table->bigInteger('amount')->nullable();
             

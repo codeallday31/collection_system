@@ -10,7 +10,7 @@
         placeholder="Name" 
         name="name" 
         autocomplete="off"
-        value="{{ old('name', isset($payable->name) ? $payable->name : null)  }}"
+        value="{{ old('name', isset($account->name) ? $account->name : null)  }}"
     >
     
     @error('name')

@@ -66,7 +66,7 @@
                         value: ''
                     });
                      $newTableRow.find('td:nth-of-type(5) select').prop({
-                       name: 'billing_items['+$tbodyTrLength+'][payable_id]',
+                       name: 'billing_items['+$tbodyTrLength+'][account_id]',
                     });
 
                     $newTableRow.appendTo($tableBody).hide().fadeIn('fast');;

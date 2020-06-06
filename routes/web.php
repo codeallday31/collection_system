@@ -47,7 +47,7 @@ Route::middleware('auth')->group(function(){
 
     Route::resource('billing', 'BillingController');
     Route::resource('client', 'ClientController')->except('show');
-    Route::resource('payable', 'PayableController')->except('show');
+    Route::resource('account', 'AccountController')->except('show');
 });
 
 Auth::routes([

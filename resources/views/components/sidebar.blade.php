@@ -38,7 +38,7 @@
                         <i class="nav-icon fas fa-file-invoice-dollar"></i>
                         <p>
                             Billing
-                            @if(request()->is('payable/*'))
+                            @if(request()->is('billing/*'))
                                 <i class="right fas fa-angle-left"></i>
                             @endif
                         </p>
@@ -110,17 +110,17 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item {{ request()->is('payable/*') ? 'has-treeview menu-open' : '' }}">
-                    <a href="{{ route('payable.index') }}" class="nav-link {{ request()->is('payable')  || request()->is('payable/*') ? 'active' : '' }}">
+                <li class="nav-item {{ request()->is('account/*') ? 'has-treeview menu-open' : '' }}">
+                    <a href="{{ route('account.index') }}" class="nav-link {{ request()->is('account')  || request()->is('account/*') ? 'active' : '' }}">
                         <i class="nav-icon fas fa-exchange-alt"></i>
                         <p>
-                            Payable
-                            @if(request()->is('payable/*'))
+                            Account
+                            @if(request()->is('account/*'))
                                 <i class="right fas fa-angle-left"></i>
                             @endif
                         </p>
                     </a>
-                    @if (request()->is('payable/*'))
+                    @if (request()->is('account/*'))
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
                                 <span href="#" class="d-block nav-link">
@@ -136,7 +136,7 @@
                         <i class="nav-icon fas fa-user-tag"></i>
                         <p>
                             Client
-                            @if(request()->is('payable/*'))
+                            @if(request()->is('client/*'))
                                 <i class="right fas fa-angle-left"></i>
                             @endif
                         </p>

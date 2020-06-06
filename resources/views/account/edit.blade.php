@@ -1,8 +1,8 @@
 <x-app>
     <x-page-header>
-        <x-slot name="menu"> payable </x-slot>
-        <x-slot name="currentPage"> Create new payable </x-slot>
-        <x-slot name="breadCrumbPage"> create </x-slot>
+        <x-slot name="menu"> account </x-slot>
+        <x-slot name="currentPage"> Edit account </x-slot>
+        <x-slot name="breadCrumbPage"> edit </x-slot>
     </x-page-header>
 
     <x-page-body>
@@ -12,15 +12,18 @@
                     <div class="card-header d-flex align-items-center">
                         <h1 class="card-title text-uppercase">Details</h1>
                         <div class="ml-auto">
-                            <a href="{{ route('payable.index') }}" type="button" class="btn btn-block bg-secondary btn-sm">
+                            <a href="{{ route('account.index') }}" type="button" class="btn btn-block bg-secondary btn-sm">
                                 <i class="fas fa-arrow-left d-inline-block mr-2"></i>Back
                             </a>
                         </div>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('payable.store') }}" method="POST">
+                        <form action="{{ route('account.update', $account->id) }}" method="POST">
                             @csrf
-                            @include('payable.partials._form')
+                            @method('PATCH')
+                            @include('account.partials._form', [
+                                'isEdit' => 'Update'
+                            ])
                         </form>
                     </div>
                 </div>

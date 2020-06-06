@@ -6,7 +6,7 @@ use App\Billing;
 use App\Client;
 use App\Http\Requests\BillingRequest;
 use App\ItemCategory;
-use App\Payable;
+use App\Account;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -22,10 +22,10 @@ class BillingController extends Controller
     {
     	$clients = Client::all()->pluck('name', 'id');
     	$items = ItemCategory::all()->pluck('name', 'id');
-        $payables = Payable::all()->pluck('name', 'id');
+        $accounts = Account::all()->pluck('name', 'id');
 
         return view('billing.create', compact(
-        	'clients', 'items', 'payables'
+        	'clients', 'items', 'accounts'
         ));
     }
 

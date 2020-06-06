@@ -92,8 +92,8 @@
                             </th>
                             <th width="23.75%" class="font-weight-normal">Description</th>
                             <th width="23.75%" class="font-weight-normal">Amount</th>
-                            <th width="23.75%" class="font-weight-normal @error('billing_items.*.payable_id') {{'table-danger'}} @enderror">
-                                Payable
+                            <th width="23.75%" class="font-weight-normal @error('billing_items.*.account_id') {{'table-danger'}} @enderror">
+                                Account Type
                                 <small class="d-inline text-danger h6 font-weight-bold">*</small>
                             </th>
                         </tr>
@@ -119,10 +119,10 @@
                         <td><input type="text" name="billing_items[0][description]" class="form-control form-control-sm"></td>
                         <td><input type="text" name="billing_items[0][amount]"class="form-control form-control-sm"></td>
                         <td style="padding-right: .75rem">
-                            <select name="billing_items[0][payable_id]" class="select2 form-control form-control-sm">
-                                @if ($payables->count() > 0)
-                                     <option value="">Select Payable</option>
-                                    @foreach ($payables as $id => $name)
+                            <select name="billing_items[0][account_id]" class="select2 form-control form-control-sm">
+                                @if ($accounts->count() > 0)
+                                     <option value="">Select Account type</option>
+                                    @foreach ($accounts as $id => $name)
                                         <option value="{{ $id }}"> {{$name}} </option>
                                     @endforeach
                                 @endif
