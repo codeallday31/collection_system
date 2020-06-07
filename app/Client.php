@@ -15,4 +15,9 @@ class Client extends Model
     {
     	return $this->belongsTo(Billing::class);
     }
+
+    public function setAddressAttribute($value)
+    {
+    	$this->attributes['address'] = str_replace("\r",'', $value);
+    }
 }
