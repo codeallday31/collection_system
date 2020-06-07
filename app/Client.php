@@ -15,4 +15,9 @@ class Client extends Model
     {
     	return $this->belongsTo(Billing::class);
     }
+    
+    public function setNameAttribute($value)
+    {
+        $this->attributes['name'] = ucwords($value);
+    }
 }
