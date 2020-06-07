@@ -30,9 +30,6 @@ class BillingRequest extends FormRequest
             'description' => [
                 'required'
             ],
-            'billing_no' => [
-                'required'
-            ],
             'billing_items.*.category_id' => [
                 'required'
             ],

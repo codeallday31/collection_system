@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Account;
 use App\Billing;
 use App\Client;
 use App\Http\Requests\BillingRequest;
 use App\ItemCategory;
-use App\Account;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -33,13 +34,11 @@ class BillingController extends Controller
     public function store(BillingRequest $request)
     {
         DB::transaction(function() use ($request){
-
             $billing = Billing::create([
                 'client_id' => $request->client_id,
-                'billing_no' => $request->billing_no,
+                'billing_no' => generateBillingNo(),
                 'description' => $request->description
             ]);
-
             $billing->items()->createMany($request['billing_items']);
         });
         return redirect()->route('billing.index')->with(notificationMessage('success', 'Billing Successfully created'));

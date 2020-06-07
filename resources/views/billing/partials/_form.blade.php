@@ -35,28 +35,6 @@
                 </div>
             </div>
             <div class="row">
-                <div class="form-group col-md-4">
-                    <label for="billing_no" class="font-weight-normal">
-                        Billing No.
-                        <small class="d-inline text-danger h6 font-weight-bold">*</small>
-                    </label>
-                    <input 
-                        type="text" 
-                        class="form-control  @error('billing_no') {{ 'is-invalid' }} @enderror"
-                        id="billing_no"
-                        name="billing_no"
-                        value="{{ old('billing_no', isset($billing) ? $billing->billing_no : null) }}"
-                        required
-                       
-                    >
-                    @error('billing_no')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-            </div>
-            <div class="row">
                 <div class="form-group col-md-8">
                     <label for="billing_no" class="font-weight-normal">
                         Description
