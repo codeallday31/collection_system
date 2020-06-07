@@ -31,7 +31,7 @@
                                     <tr>
                                         <td width="5%">{{ $billing->id }}</td>
                                         <td width="15%">{{ $billing->billing_no }}</td>
-                                        <td width="31.5%">{{ $billing->description }}</td>
+                                        <td width="31.5%">{!! $billing->description !!}</td>
                                         <td width="15.5%">{{ $billing->client->name }}</td>
                                     </tr>
                                 @endforeach
@@ -42,9 +42,6 @@
             </div>
         </div>
     </x-page-body>
-    @section('customcss')
-        <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
-    @endsection
     @section('customscript')
     <script>
         

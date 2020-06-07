@@ -55,9 +55,6 @@
             </div>
         </div>
     </x-page-body>
-    @section('customcss')
-        <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
-    @endsection
     @section('customscript')
     <script>
          $(document).ready(function(){
