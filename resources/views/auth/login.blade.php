@@ -1,5 +1,5 @@
 <x-master>
-    @section('customcss')
+    @section('custompagecss')
         <style>
             .login-page{
                 height: 85vh;

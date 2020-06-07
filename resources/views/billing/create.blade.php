@@ -31,7 +31,7 @@
             </div>
         </div>
     </x-page-body>
-    @section('customcss')
+    @section('custompagecss')
         <style>
             table.table-billing-item tbody.billing-input tr:first-child td button {
                 display: none;

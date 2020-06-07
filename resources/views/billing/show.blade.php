@@ -59,7 +59,7 @@
                         </div>
                     </div>
                     <div class="card-body table-responsive p-0">
-                        <table class="table table-bordered">
+                        <table class="table table-bordered table-md">
                             <thead>
                                 <th> Item Name</th>
                                 <th>Description</th>

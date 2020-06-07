@@ -15,7 +15,8 @@
         {{-- <link rel="stylesheet" href="{{ mix('css/sweetalert2/sweetalert.css') }}"> --}}
         <link rel="stylesheet" href="{{ mix('css/select2/select2.css') }}">
         <link rel="stylesheet" href="{{ mix('css/adminLTE/main.css')}}">
-        @yield('customcss')
+        <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+        @yield('custompagecss')
         
         <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
     </head>
