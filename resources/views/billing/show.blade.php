@@ -32,7 +32,7 @@
                                 <div class="pb-2">
                                    <span class="d-inline-block mb-2 text-uppercase font-weight-bold"> Description</span>
                                     <p class="text-justify mb-1" style="text-indent: 5%">
-                                        {!! nl2br($billing->description) !!}
+                                        {!! $billing->description !!}
                                     </p>
                                 </div>
                             </li>
