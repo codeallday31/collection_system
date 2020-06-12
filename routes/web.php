@@ -34,13 +34,6 @@ Route::middleware('auth')->group(function(){
         });
     });
 
-    Route::prefix('billing')->group(function() {
-        Route::name('billing.')->group(function() {
-            Route::get('/', 'BillingController@index')->name('index');
-            Route::get('/create', 'BillingController@create')->name('create');
-        });
-    });
-
     Route::group(['prefix' => 'item', 'as' => 'item.'] , function () {
         Route::resource('category', 'ItemCategoryController')->except('show');
     });

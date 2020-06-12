@@ -44,6 +44,7 @@
     @section('customscript')
         <script>
             $(document).ready(function() {
+                var totalAmount = [];
                 var $tableBody = $('.table-billing-item tbody.billing-input');
                 var $tbodyTrLength = $tableBody.find('tr').length;
                 $('.select2').select2({
@@ -54,6 +55,7 @@
                     event.preventDefault();
                     $('select.select2').select2('destroy');
                     var $newTableRow = $tableBody.find('tr:last').clone();
+                    $newTableRow.removeAttr('data-row style').attr('data-row', $tbodyTrLength);
                     $newTableRow.find('td:nth-of-type(2) select').prop({
                         name: 'billing_items['+$tbodyTrLength+'][category_id]',
                         class: 'select2 form-control form-control-sm',
@@ -80,11 +82,30 @@
                 });
 
                 $('.table-billing-item').on('click', '.remove-item',  function() {
+                    var $dataRow = $(this).parent().parent().data('row');
                     $(this).parent().parent().fadeOut('fast', function() {
                         $(this).remove();
                     });
+                    totalAmount[$dataRow] = "";
+                    calculateTotalAmount(totalAmount)
+                    
                 });
+
+                $('.table-billing-item').on('focusout', '.input-amount', function(event){
+                    var $dataRow = $(this).parent().parent().data('row');
+                    totalAmount[$dataRow] = $(this).val();
+                    calculateTotalAmount(totalAmount)
+                });
+
             });
+
+            function calculateTotalAmount(totalAmount){
+                var $sum = 0
+                $.each(totalAmount, function($index, $value) {
+                    $sum += parseFloat($value === "" ? 0 : $value);
+                });
+                $('#total-amount-value').text(((($sum * 100) / 100).toFixed(2)));
+            }
         </script>
     @endsection
 </x-app>

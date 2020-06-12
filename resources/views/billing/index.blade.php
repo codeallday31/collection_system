@@ -42,9 +42,15 @@
             </div>
         </div>
     </x-page-body>
+    @section('custompagecss')
+        <style>
+            table tbody tr {
+                cursor: pointer;
+            }
+        </style>
+    @endsection
     @section('customscript')
     <script>
-        
          $(document).ready(function(){
               var table = $('#dataTable').DataTable({
                 "aaSorting": []

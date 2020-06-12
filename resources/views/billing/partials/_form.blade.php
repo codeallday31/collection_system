@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="card card-success card-outline col-md-12 pl-0 pr-0">
+    <div class="card card-success card-outline col-md-6 pl-0 pr-0">
         <div class="card-header">
             <h3 class="card-title font-weight-bold text-uppercase">Details</h3>
             <div class="card-tools">
@@ -8,7 +8,7 @@
         </div>
         <div class="card-body">
             <div class="row">
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-8">
                     <label for="client_id" class="font-weight-normal">
                         Client
                         <small class="d-inline text-danger h6 font-weight-bold">*</small>
@@ -35,7 +35,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="form-group col-md-8">
+                <div class="form-group col-md-12">
                     <label for="billing_no" class="font-weight-normal">
                         Description
                         <small class="d-inline text-danger h6 font-weight-bold">*</small>
@@ -55,6 +55,10 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="col-md-6 text-right">
+        <p class="h1 font-weight-bold text-uppercase">Total Amount</p>
+        <p class="h3 font-weight" id="total-amount-value">0.00</p>
     </div>
 </div>
 
@@ -90,7 +94,7 @@
                     </thead>
                     <tbody class="billing-input">
                         @foreach (old('billing_items', ['']) as $key => $oldInputs)
-                            <tr>
+                            <tr data-row="{{ $loop->index }}">
                                 <td class="text-center pl-2">
                                     <button type="button" class="bg-danger btn btn-sm remove-item">
                                         <i class="far fa-minus-square"></i>
@@ -127,7 +131,7 @@
                                     <input 
                                         type="text" 
                                         name="billing_items[{{ $loop->index }}][amount]" 
-                                        class="form-control form-control-sm"
+                                        class="form-control form-control-sm input-amount"
                                         value="{{ old('billing_items.'.$key.'.amount') }}"
                                     >
                                 </td>

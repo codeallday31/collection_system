@@ -51,17 +51,18 @@
         </div>
         <div class="row">
             <div class="col-lg-12">
-                <div class="card card-success card-outline col-md-12 pl-0 pr-0">
+                <div class="card card-success card-outline col-md-12">
                     <div class="card-header">
                         <h3 class="card-title text-uppercase font-weight-bold">Billing Items</h3>
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
                         </div>
                     </div>
-                    <div class="card-body table-responsive p-0">
-                        <table class="table table-bordered table-md">
+                    <div class="card-body table-responsive pl-1 pr-1">
+                        <table id="dataTable" class="table table-bordered table-md">
                             <thead>
-                                <th> Item Name</th>
+                                <td></td>
+                                <th>IItem Name</th>
                                 <th>Description</th>
                                 <th>Amount</th>
                                 <th>Account Type</th>
@@ -69,6 +70,7 @@
                             <tbody>
                                 @foreach ($billing->items as $item)
                                     <tr>
+                                        <td> {{ $item->id }} </td>
                                         <td>{{ $item->category->name }}</td>
                                         <td>{{ $item->description }}</td>
                                         <td>{{ $item->amount }}</td>
@@ -82,5 +84,39 @@
             </div>
         </div>
     </x-page-body>
+    @section('custompagecss')
+        <style>
+            table tbody tr {
+                cursor: pointer;
+            }
+        </style>
+    @endsection
+    @section('customscript')
+        <script>
+            $(document).ready(function() {
+                var $dataTable = $('#dataTable').DataTable({
+                    "info": false,
+                    "lengthChange": false,
+                    "oLanguage": {
+                        "oPaginate": {
+                            "sPrevious": '<i class="fas fa-arrow-left"></i>',
+                            "sNext": '<i class="fas fa-arrow-right"></i>',
+                        },
+                    },
+                    "aaSorting": [],
+                    "columnDefs": [
+                        { "targets": [0], "visible": false },
+                    ],
+                });
+
+                $('#dataTable tbody').on('click', 'tr', function () {
+                    var data = $dataTable.row( this ).data();
+                    var url = "{{ route('item.billing.edit', ':id') }}";
+                        url = url.replace(':id', data[0]);
+                    window.location.href = url;
+                });
+            });
+        </script>
+    @endsection
 </x-app>
 
