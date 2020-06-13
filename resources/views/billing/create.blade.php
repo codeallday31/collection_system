@@ -19,7 +19,7 @@
                             <a href="{{ route('billing.index') }}" type="button" class="btn btn-block bg-secondary btn-sm">
                                 <i class="fas fa-arrow-left d-inline-block mr-2"></i>Back
                             </a>
-                        </div>
+                    </div>
                     </div>
                     <div class="card-body">
                         <form action="{{ route('billing.store') }}" method="POST">
@@ -31,87 +31,5 @@
             </div>
         </div>
     </x-page-body>
-    @section('custompagecss')
-        <style>
-            table.table-billing-item tbody.billing-input tr:first-child td button {
-                display: none;
-            }
-            .select2.is-invalid + span > span > span {
-                border-color: #dc3545;
-            }
-        </style>
-    @endsection
-    @section('customscript')
-        <script>
-            $(document).ready(function() {
-                var totalAmount = [];
-                var $tableBody = $('.table-billing-item tbody.billing-input');
-                var $tbodyTrLength = $tableBody.find('tr').length;
-                $('.select2').select2({
-                    width: '100%',
-                });
-
-                $('.add-billing-item').on('click', function(event) {
-                    event.preventDefault();
-                    $('select.select2').select2('destroy');
-                    var $newTableRow = $tableBody.find('tr:last').clone();
-                    $newTableRow.removeAttr('data-row style').attr('data-row', $tbodyTrLength);
-                    $newTableRow.find('td:nth-of-type(2) select').prop({
-                        name: 'billing_items['+$tbodyTrLength+'][category_id]',
-                        class: 'select2 form-control form-control-sm',
-                        val: ''
-                    });
-                    $newTableRow.find('td:nth-of-type(3) input[type="text"]').prop({
-                        name: 'billing_items['+$tbodyTrLength+'][description]',
-                        value: '',
-                    });
-                    $newTableRow.find('td:nth-of-type(4) input[type="text"]').prop({
-                        name: 'billing_items['+$tbodyTrLength+'][amount]',
-                        value: ''
-                    });
-                     $newTableRow.find('td:nth-of-type(5) select').prop({
-                        name: 'billing_items['+$tbodyTrLength+'][account_id]',
-                        class: 'select2 form-control form-control-sm'
-                    });
-
-                    $newTableRow.appendTo($tableBody).hide().fadeIn('fast');;
-                     $('.select2').select2({
-                        width: '100%'
-                     });
-                    $tbodyTrLength++;
-                });
-
-                $('.table-billing-item').on('click', '.remove-item',  function() {
-                    var $dataRow = $(this).parent().parent().data('row');
-                    $(this).parent().parent().fadeOut('fast', function() {
-                        $(this).remove();
-                    });
-                    totalAmount[$dataRow] = "";
-                    calculateTotalAmount(totalAmount)
-                    
-                });
-
-                $('.table-billing-item').on('focusout', '.input-amount', function(event){
-                    var $dataRow = $(this).parent().parent().data('row');
-                    totalAmount[$dataRow] = $(this).val();
-                    calculateTotalAmount(totalAmount)
-                });
-
-            });
-
-            function calculateTotalAmount(totalAmount){
-                var $sum = 0
-                var options = { 
-                    minimumFractionDigits: 2,
-                    maximumFractionDigits: 2 
-                };
-                $.each(totalAmount, function($index, $value) {
-                    $sum += parseFloat($value === "" ? 0 : $value);
-                });
-                $('#total-amount-value').text($sum.toLocaleString('en', options));
-            }
-            
-        </script>
-    @endsection
 </x-app>
 

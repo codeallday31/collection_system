@@ -59,107 +59,129 @@
     <x-total-billing-amount/>
 </div>
 
-@if (!isset($isEdit))
-    <div class="row">
-        <div class="card card-success card-outline col-md-12 pl-0 pr-0">
-            <div class="card-header d-flex align-items-center">
-                <h3 class="card-title font-weight-bold text-uppercase text-uppercase">Billing Items</h3>
-                <div class="ml-auto">
-                    <button type="button" class="bg-primary btn btn-sm add-billing-item">
-                        <i class="fas fa-plus"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="card-body p-0 table-responsive">
-                <table class="table table-bordered table-billing-item">
-                    <thead>
-                        <thead>
-                            <tr >
-                                <th width="5%"></th>
-                                <th width="23.75%" class="font-weight-normal @error('billing_items.*.category_id') {{'table-danger'}} @enderror">
-                                    Item name
-                                    <small class="d-inline text-danger h6 font-weight-bold">*</small>
-                                </th>
-                                <th width="23.75%" class="font-weight-normal">Description</th>
-                                <th width="23.75%" class="font-weight-normal">Amount</th>
-                                <th width="23.75%" class="font-weight-normal @error('billing_items.*.account_id') {{'table-danger'}} @enderror">
-                                    Account Type
-                                    <small class="d-inline text-danger h6 font-weight-bold">*</small>
-                                </th>
-                            </tr>
-                        </thead>
-                    </thead>
-                    <tbody class="billing-input">
-                        @foreach (old('billing_items', ['']) as $key => $oldInputs)
-                            <tr data-row="{{ $loop->index }}">
-                                <td class="text-center pl-2">
-                                    <button type="button" class="bg-danger btn btn-sm remove-item">
-                                        <i class="far fa-minus-square"></i>
-                                    </button>
-                                </td>
-                                <td>
-                                    <select 
-                                        name="billing_items[{{ $loop->index }}][category_id]" 
-                                        class="select2 form-control form-control-sm 
-                                            @error('billing_items.'.$key.'.category_id')  {{ 'is-invalid' }} @enderror"
-                                        required
-                                    >
-                                    @if ($items->count() > 0)
-                                         <option value="">Select Item Category</option>
-                                            @foreach ($items as $id => $name)
-                                                <option value="{{ $id }}" 
-                                                    {{ old('billing_items.'.$key.'.category_id') == $id ? 'selected' : '' }}
-                                                > 
-                                                    {{$name}} 
-                                                </option>
-                                            @endforeach
-                                        @endif
-                                    </select>
-                                </td>
-                                <td>
-                                    <input 
-                                        type="text" 
-                                        name="billing_items[{{ $loop->index }}][description]" 
-                                        class="form-control form-control-sm"
-                                        value="{{ old('billing_items.'.$key.'.description') }}"
-                                    >
-                                </td>
-                                <td>
-                                    <input 
-                                        type="text" 
-                                        name="billing_items[{{ $loop->index }}][amount]" 
-                                        class="form-control form-control-sm input-amount"
-                                        value="{{ old('billing_items.'.$key.'.amount') }}"
-                                    >
-                                </td>
-                                <td style="padding-right: .75rem">
-                                    <select 
-                                        name="billing_items[{{ $loop->index }}][account_id]" 
-                                        class="select2 form-control form-control-sm
-                                             @error('billing_items.'.$key.'.account_id')  {{ 'is-invalid' }} @enderror"
-                                        required
-                                    >
-                                        @if ($accounts->count() > 0)
-                                             <option value="">Select Account type</option>
-                                            @foreach ($accounts as $id => $name)
-                                                <option value="{{ $id }}" 
-                                                    {{ old('billing_items.'.$key.'.account_id') == $id ? 'selected' : '' }}
-                                                > 
-                                                    {{$name}} 
-                                                </option>
-                                            @endforeach
-                                        @endif
-                                    </select>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+<div class="row">
+    <div class="card card-success card-outline col-md-12 pl-0 pr-0">
+        <div class="card-header d-flex align-items-center">
+            <h3 class="card-title font-weight-bold text-uppercase text-uppercase">Billing Items</h3>
+            <div class="ml-auto">
+                <button type="button" class="bg-primary btn btn-sm add-billing-item">
+                    <i class="fas fa-plus"></i>
+                </button>
             </div>
         </div>
+        <div class="card-body p-0 table-responsive">
+            <table class="table table-bordered table-billing-item">
+                <thead>
+                    <thead>
+                        <tr >
+                            <th width="5%"></th>
+                            <th width="23.75%" class="font-weight-normal @error('billing_items.*.category_id') {{'table-danger'}} @enderror">
+                                Item name
+                                <small class="d-inline text-danger h6 font-weight-bold">*</small>
+                            </th>
+                            <th width="23.75%" class="font-weight-normal">Description</th>
+                            <th width="23.75%" class="font-weight-normal">Amount</th>
+                            <th width="23.75%" class="font-weight-normal @error('billing_items.*.account_id') {{'table-danger'}} @enderror">
+                                Account Type
+                                <small class="d-inline text-danger h6 font-weight-bold">*</small>
+                            </th>
+                        </tr>
+                    </thead>
+                </thead>
+                <tbody class="billing-input">
+                    @if (old('billing_items') || request()->segment(2) === 'create')
+                        <x-billing-item :billingItems="old('billing_items', [''])"/>
+                    @else
+                        <x-billing-item :billingItems="$billing->items"/>
+                    @endif
+                </tbody>
+            </table>
+        </div>
     </div>
-@endif
-
+</div>
 <button type="submit" class="btn btn-primary btn-sm">
     <i class="fas fa-{{ isset($isEdit) ? 'sync-alt' : 'save' }}"></i> {{ $isEdit ?? 'Save' }}
 </button>
+@section('custompagecss')
+    <style>
+        table.table-billing-item tbody.billing-input tr:first-child td button {
+            display: none;
+        }
+        .select2.is-invalid + span > span > span {
+            border-color: #dc3545;
+        }
+    </style>
+@endsection
+@section('customscript')
+    <script>
+        $(document).ready(function() {
+            var totalAmount = [];
+            var $tableBody = $('.table-billing-item tbody.billing-input');
+            var $tbodyTrLength = $tableBody.find('tr').length;
+            $('.select2').select2({
+                width: '100%',
+            });
+
+            $('.add-billing-item').on('click', function(event) {
+                event.preventDefault();
+                $('select.select2').select2('destroy');
+                var $newTableRow = $tableBody.find('tr:last').clone();
+                $newTableRow.removeAttr('data-row style').attr('data-row', $tbodyTrLength);
+                $newTableRow.find('td:nth-of-type(2) select').prop({
+                    name: 'billing_items['+$tbodyTrLength+'][category_id]',
+                    class: 'select2 form-control form-control-sm',
+                    val: ''
+                });
+                $newTableRow.find('td:nth-of-type(3) input[type="text"]').prop({
+                    name: 'billing_items['+$tbodyTrLength+'][description]',
+                    value: '',
+                });
+                $newTableRow.find('td:nth-of-type(4) input[type="text"]').prop({
+                    name: 'billing_items['+$tbodyTrLength+'][amount]',
+                    value: ''
+                });
+                 $newTableRow.find('td:nth-of-type(5) select').prop({
+                    name: 'billing_items['+$tbodyTrLength+'][account_id]',
+                    class: 'select2 form-control form-control-sm'
+                });
+
+                $newTableRow.appendTo($tableBody).hide().fadeIn('fast');;
+                 $('.select2').select2({
+                    width: '100%'
+                 });
+                $tbodyTrLength++;
+            });
+
+            $('.table-billing-item').on('click', '.remove-item',  function() {
+                var $dataRow = $(this).parent().parent().data('row');
+                $(this).parent().parent().fadeOut('fast', function() {
+                    $(this).remove();
+                });
+                totalAmount[$dataRow] = "";
+                calculateTotalAmount(totalAmount)
+                
+            });
+
+            $('.table-billing-item').on('focusout', '.input-amount', function(event){
+                var $dataRow = $(this).parent().parent().data('row');
+                totalAmount[$dataRow] = $(this).val();
+                calculateTotalAmount(totalAmount)
+            });
+
+        });
+
+        function calculateTotalAmount(totalAmount){
+            console.log(totalAmount);
+            var $sum = 0
+            var options = { 
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2 
+            };
+            $.each(totalAmount, function($index, $value) {
+                $sum += parseFloat($value === "" ? 0 : $value);
+            });
+            $('#total-amount-value').text($sum.toLocaleString('en', options));
+        }
+        
+    </script>
+@endsection
