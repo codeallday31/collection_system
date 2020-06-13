@@ -56,10 +56,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-6 text-right">
-        <p class="h1 font-weight-bold text-uppercase">Total Amount</p>
-        <p class="h3 font-weight" id="total-amount-value">0.00</p>
-    </div>
+    <x-total-billing-amount/>
 </div>
 
 @if (!isset($isEdit))
