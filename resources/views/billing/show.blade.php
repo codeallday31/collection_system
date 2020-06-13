@@ -6,7 +6,7 @@
 
     <x-page-body>
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-md-6">
                 <div class="card card-success card-outline">
                     <div class="card-header">
                         <h3 class="card-title text-uppercase font-weight-bold">Details</h3>
@@ -48,6 +48,7 @@
                     </div>
                 </div>
             </div>
+            <x-total-billing-amount/>
         </div>
         <div class="row">
             <div class="col-lg-12">
@@ -73,7 +74,7 @@
                                         <td> {{ $item->id }} </td>
                                         <td>{{ $item->category->name }}</td>
                                         <td>{{ $item->description }}</td>
-                                        <td>{{ $item->amount }}</td>
+                                        <td>{{ number_format($item->amount, 2) }}</td>
                                         <td>{{ $item->account->name }}</td>
                                     </tr>
                                 @endforeach
@@ -107,13 +108,6 @@
                     "columnDefs": [
                         { "targets": [0], "visible": false },
                     ],
-                });
-
-                $('#dataTable tbody').on('click', 'tr', function () {
-                    var data = $dataTable.row( this ).data();
-                    var url = "{{ route('item.billing.edit', ':id') }}";
-                        url = url.replace(':id', data[0]);
-                    window.location.href = url;
                 });
             });
         </script>

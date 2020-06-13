@@ -101,11 +101,16 @@
 
             function calculateTotalAmount(totalAmount){
                 var $sum = 0
+                var options = { 
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2 
+                };
                 $.each(totalAmount, function($index, $value) {
                     $sum += parseFloat($value === "" ? 0 : $value);
                 });
-                $('#total-amount-value').text(((($sum * 100) / 100).toFixed(2)));
+                $('#total-amount-value').text($sum.toLocaleString('en', options));
             }
+            
         </script>
     @endsection
 </x-app>
