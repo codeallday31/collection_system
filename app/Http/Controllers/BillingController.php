@@ -54,12 +54,12 @@ class BillingController extends Controller
 
     public function update(BillingRequest $request, Billing $billing)
     {   
-        DB::transaction(function() use ($request){
+        DB::transaction(function() use ($request, $billing){
             $billing->update($request->all());
             $billing->items()->delete();
             $billing->items()->createMany($request->billing_items);
         });
 
-        return redirect()->route('billing.index')->with(notificationMessage('info', 'Billing succesfully updated'));
+        return redirect()->route('billing.show', $billing->id)->with(notificationMessage('info', 'Billing succesfully updated'));
     }
 }
