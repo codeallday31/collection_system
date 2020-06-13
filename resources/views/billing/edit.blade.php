@@ -1,7 +1,7 @@
 <x-app>
     <x-page-header>
         <x-slot name="menu"> billing </x-slot>
-        <x-slot name="currentPage"> Edit billing </x-slot>
+        <x-slot name="currentPage"> Edit Billing No: <strong>{{ $billing->billing_no }}</strong> </x-slot>
         <x-slot name="breadCrumbPage"> edit </x-slot>
     </x-page-header>
 
