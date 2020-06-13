@@ -4,7 +4,7 @@
             .login-page{
                 height: 85vh;
             }
-            div.login-logo {
+/*            div.login-logo {
                 -webkit-clip-path: polygon(13% 0, 87% 0, 100% 100%, 0% 100%);
                 clip-path: polygon(13% 0, 87% 0, 100% 100%, 0% 100%);
             }
@@ -14,14 +14,15 @@
                 width: 100%; 
                 background-color: #fff; 
                 padding-left: 14%;
-            }
+            }*/
         </style>
     @endsection
     <x-slot name="bodyClass">hold-transition login-page</x-slot>
 <div class="login-box">
-    <div class="login-logo mb-0">
-        <img src="{{ asset('storage/images/cam.jpg')}}" alt="company Logo" class="brand-image"
-           style="">
+    <div class="login-logo">
+        Collection System
+     {{--    <img src="{{ asset('storage/images/cam.jpg')}}" alt="company Logo" class="brand-image"
+           style=""> --}}
     </div>
     <div class="card">
         <div class="card-body login-card-body">
