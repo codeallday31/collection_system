@@ -22,13 +22,9 @@ class BillingController extends Controller
 
     public function create()
     {
-    	$clients = Client::all()->pluck('name', 'id');
-    	$items = ItemCategory::all()->pluck('name', 'id');
-        $accounts = Account::all()->pluck('name', 'id');
+        $clients = Client::all()->pluck('name', 'id');
 
-        return view('billing.create', compact(
-        	'clients', 'items', 'accounts'
-        ));
+        return view('billing.create', compact('clients'));
     }
 
     public function store(BillingRequest $request)
@@ -52,12 +48,17 @@ class BillingController extends Controller
     public function edit(Billing $billing)
     {
         $clients = Client::all()->pluck('name', 'id');
-        return view('billing.edit', compact('billing','clients'));
+        
+        return view('billing.edit', compact('billing', 'clients'));
     }
 
     public function update(BillingRequest $request, Billing $billing)
-    {
-        $billing->update($request->all());
+    {   
+        DB::transaction(function() use ($request){
+            $billing->update($request->all());
+            $billing->items()->delete();
+            $billing->items()->createMany($request->billing_items);
+        });
 
         return redirect()->route('billing.index')->with(notificationMessage('info', 'Billing succesfully updated'));
     }
