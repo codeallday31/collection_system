@@ -26,9 +26,4 @@ class Billing extends Model
     {
         return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('F d, Y');
     }
-
-    public function setDescriptionAttribute($value)
-    {
-        $this->attributes['description'] = str_replace("\r",'', $value);
-    }
 }

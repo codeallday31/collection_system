@@ -2,20 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Account;
 use App\Billing;
 use App\Client;
 use App\Http\Requests\BillingRequest;
-use App\ItemCategory;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class BillingController extends Controller
 {
     public function index()
     {
-        $billings = Billing::latest()->get();
+        $billings = Billing::with('client')->latest()->get();
         
         return view('billing.index', compact('billings'));
     }
@@ -32,11 +28,11 @@ class BillingController extends Controller
         DB::transaction(function() use ($request){
             $billing = Billing::create([
                 'client_id' => $request->client_id,
-                'billing_no' => generateBillingNo(),
                 'description' => $request->description
             ]);
-            $billing->items()->createMany($request['billing_items']);
+            $billing->items()->createMany($request['billing_items']);       
         });
+
         return redirect()->route('billing.index')->with(notificationMessage('success', 'Billing Successfully created'));
     }
 
@@ -48,18 +44,16 @@ class BillingController extends Controller
     public function edit(Billing $billing)
     {
         $clients = Client::all()->pluck('name', 'id');
-        
         return view('billing.edit', compact('billing', 'clients'));
     }
 
     public function update(BillingRequest $request, Billing $billing)
     {   
-        DB::transaction(function() use ($request, $billing){
+        DB::transaction(function () use ($request, $billing){
             $billing->update($request->all());
-            $billing->items()->delete();
             $billing->items()->createMany($request->billing_items);
         });
-
+        
         return redirect()->route('billing.show', $billing->id)->with(notificationMessage('info', 'Billing succesfully updated'));
     }
 }
