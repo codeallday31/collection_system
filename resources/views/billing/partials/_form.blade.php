@@ -118,6 +118,11 @@
             var totalAmount = [];
             var $tableBody = $('.table-billing-item tbody.billing-input');
             var $tbodyTrLength = $tableBody.find('tr').length;
+            
+            $.each($('tbody.billing-input tr td:nth-of-type(4) input'), function (key, element) {
+                totalAmount.push($(element).val());
+            });
+            
             $('.select2').select2({
                 width: '100%',
             });
@@ -126,7 +131,11 @@
                 event.preventDefault();
                 $('select.select2').select2('destroy');
                 var $newTableRow = $tableBody.find('tr:last').clone();
-                $newTableRow.removeAttr('data-row style').attr('data-row', $tbodyTrLength);
+             
+                $newTableRow.removeAttr('data-row style')
+                    .attr('data-row', $tbodyTrLength)
+                    .find('td:nth-of-type(2) select option, td:nth-of-type(5) select option').removeAttr('selected');
+                    
                 $newTableRow.find('td:nth-of-type(2) select').prop({
                     name: 'billing_items['+$tbodyTrLength+'][category_id]',
                     class: 'select2 form-control form-control-sm',

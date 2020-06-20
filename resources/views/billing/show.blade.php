@@ -95,13 +95,6 @@
             </div>
         </div>
     </x-page-body>
-    @section('custompagecss')
-        <style>
-            table tbody tr {
-                cursor: pointer;
-            }
-        </style>
-    @endsection
     @section('customscript')
         <script>
             $(document).ready(function() {
@@ -119,6 +112,20 @@
                         { "targets": [0], "visible": false },
                     ],
                 });
+
+                if ("{{session()->has('message')}}") {
+                    toastr.options = {
+                        "progressBar": true,
+                        "timeOut": "1500",
+                    }
+                    var alertType = "{{session()->get('alert-type')}}";
+                    var message = "{{session()->get('message')}}";
+                    switch (alertType) {
+                        case 'info':
+                            toastr.info(message)
+                            break;
+                    }
+                }
             });
         </script>
     @endsection
