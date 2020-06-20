@@ -11,9 +11,10 @@ class BillingController extends Controller
 {
     public function index()
     {
-        $billings = Billing::with('client')->latest()->get();
+        $billings = Billing::with('client')->withTotalAmount()->latest()->get();
         
         return view('billing.index', compact('billings'));
+
     }
 
     public function create()
@@ -51,6 +52,7 @@ class BillingController extends Controller
     {   
         DB::transaction(function () use ($request, $billing){
             $billing->update($request->all());
+            $billing->items()->delete();
             $billing->items()->createMany($request->billing_items);
         });
         
