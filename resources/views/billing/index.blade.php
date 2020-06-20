@@ -24,6 +24,7 @@
                                     <th>Billing No</th>
                                     <th>Desciption</th>
                                     <th>Client</th>
+                                    <th>Amount</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -33,6 +34,10 @@
                                         <td width="15%">{{ $billing->billing_no }}</td>
                                         <td width="31.5%">{!! nl2br($billing->description) !!}</td>
                                         <td width="15.5%">{{ $billing->client->name }}</td>
+                                        <td width="10%">
+                                            <span class="d-inline-block ml-1">&#x20B1;</span>
+                                            {{ number_format($billing->totalAmount, 2) }}
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
