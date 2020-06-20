@@ -9,14 +9,7 @@ class BillingObserver
 {
     public function creating(BIlling $billing)
     {   
-        $billing->billing_id = static::generateBillingNo();
         $billing->description = replaceTo1LineBreak($billing->description);
-    }
-
-    public function updating(Billing $billing)
-    {
-        $billing->description = replaceTo1LineBreak($billing->description);
-        $billing->items()->delete();
     }
     
     protected static function generateBillingNo()
