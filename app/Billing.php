@@ -34,17 +34,6 @@ class Billing extends Model
         $this->attributes['description'] = replaceTo1LineBreak($value);
     }
 
-    // public function scopeWithTotalAmount(Builder $query)
-    // {
-    //     return $query->select('billings.id','billings.billing_no', 'billings.description', 'clients.name')
-    //             ->selectRaw('SUM(amount) as totalAmount')
-    //             ->join('clients', 'billings.client_id', 'clients.id')
-    //             ->join('items', 'billings.id', 'items.billing_id')
-    //             ->orderBy('billing_id', 'desc')
-    //             ->groupBy('billings.id')
-    //             ->get();
-    // }
-
     public function scopeWithTotalAmount($query)
     {
         $query->withCount([
@@ -52,5 +41,28 @@ class Billing extends Model
                     $query->select(DB::raw("SUM(amount) as totalAmount"));
                 }
             ]);
+    }
+
+    public static function withBillingItems($id)
+    {
+        return Billing::toBase()->select(
+                'item_categories.name as category_name', 
+                'accounts.name as account_name', 
+                'items.id', 'items.description', 
+                'items.amount'
+            )->from('items')
+            ->join('accounts', 'accounts.id', 'items.account_id')
+            ->join('item_categories', 'item_categories.id', 'items.category_id')
+            ->where('items.billing_id', $id);
+    }
+
+    public static function withClientAmount()
+    {
+        return Billing::toBase()->addSelect(['amount' => Item::selectRaw('sum(amount) as amount')
+            ->whereColumn('billing_id', 'billings.id')
+         , 'client_name' => Client::select('name')
+                ->whereColumn('id', 'billings.client_id')
+        ])
+        ->orderBy('id', 'desc');
     }
 }
