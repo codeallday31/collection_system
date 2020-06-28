@@ -75,13 +75,13 @@
                                                 <th>Account Type</th>
                                             </thead>
                                             <tbody>
-                                                @foreach ($billing->items as $item)
+                                                @foreach ($items as $item)
                                                     <tr>
                                                         <td> {{ $item->id }} </td>
-                                                        <td>{{ $item->category->name }}</td>
+                                                        <td>{{ $item->category_name }}</td>
                                                         <td>{{ $item->description }}</td>
                                                         <td>{{ number_format($item->amount, 2) }}</td>
-                                                        <td>{{ $item->account->name }}</td>
+                                                        <td>{{ $item->account_name }}</td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>

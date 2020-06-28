@@ -4,7 +4,6 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 use Illuminate\Http\Request;
-use App\Billing;
 
 class TotalBillingAmount extends Component
 {
@@ -16,7 +15,6 @@ class TotalBillingAmount extends Component
      */
     public function __construct()
     {
-        
         $this->totalAmount = request('billing') ? request('billing')->items->sum('amount') : 0;
     }
 
