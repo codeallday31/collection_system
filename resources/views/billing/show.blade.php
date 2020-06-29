@@ -54,7 +54,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <x-total-billing-amount/>
+                            <x-total-billing-amount :totalBilling="$items->sum('amount')"></x-total-billing-amount>
                         </div>
                         <div class="row">
                             <div class="col-lg-12">

@@ -23,6 +23,7 @@ mix.js('resources/js/app.js', 'public/js')
         ],
         "public/css/datatable/dataTable.css"
     )
+    .styles("node_modules/admin-lte/plugins/icheck-bootstrap/icheck-bootstrap.min.css", "public/css/icheck/icheck.css")
     .scripts("node_modules/admin-lte/plugins/select2/css/select2.min.css", "public/css/select2/select2.css")
     .scripts("node_modules/admin-lte/dist/js/adminlte.min.js", "public/js/adminLTE/main.js")
     .scripts(
