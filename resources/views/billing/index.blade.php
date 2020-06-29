@@ -16,7 +16,7 @@
                             </a>
                         </div>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body table-responsive">
                         <table id="dataTable" class="table table-bordered table table-md">
                             <thead>
                                 <tr>
