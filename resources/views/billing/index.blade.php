@@ -24,6 +24,7 @@
                                     <th>Desciption</th>
                                     <th>Client</th>
                                     <th>Amount</th>
+                                    <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -36,8 +37,12 @@
                                         <td width="15.5%">{{ $billing->client_name }}</td>
                                         <td width="10%">
                                             <span class="d-inline-block ml-1">&#x20B1;</span>
-                                            {{ $billing->amount }}
+                                            {{ number_format($billing->amount, 2) }}
                                             {{-- {{ $billing->items->sum('amount')}} --}}
+                                        </td>
+                                        <td class="text-center" width="5%">
+                                            <button data-toggle="modal" data-target="#modal-danger" type="button" class="btn btn-block btn-danger btn-xs unpaid-bill" data-id="{{ $billing->id }}">UnPaid</button>
+                                            {{-- <span class="badge badge-danger d-block">Unpaid</span> --}}
                                         </td>
                                     </tr>
                                 @endforeach
@@ -47,14 +52,41 @@
                 </div>
             </div>
         </div>
+        <div class="modal fade" id="modal-danger" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog">
+                <div class="modal-content bg-danger">
+
+                </div>
+            </div>
+        </div>
     </x-page-body>
+    @section('custompagecss')
+        <link rel="stylesheet" href="{{ mix('css/icheck/icheck.css') }}">
+    @endsection
     @section('customscript')
     <script>
-         $(document).ready(function(){
-              var table = $('#dataTable').DataTable({
+        $(document).ready(function(){
+            var table = $('#dataTable').DataTable({
                 "aaSorting": []
-              });
-     
+            });
+            
+            $('.unpaid-bill').on('click', function() {
+                var billingId = $(this).data('id');
+                $.ajax({
+                    method:'GET',
+                    url : "{{ route('ajax.billing.show') }}",
+                    data : {
+                        billingId : billingId,
+                    },
+                    success: function(data) {
+                      $('#modal-danger .modal-content').html(data);
+                    },
+                    error: function(error) {
+                        console.log(error)
+                    }
+                })
+            });
+
                 // $('#dataTable tbody').on('click', 'tr', function () {
                 //     var data = table.row( this ).data();
                 //     var url = "{{ route('billing.show', ':id') }}";
