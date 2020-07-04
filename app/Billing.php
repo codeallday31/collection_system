@@ -2,14 +2,17 @@
 
 namespace App;
 
-use DB;
 use App\Item;
 use Carbon\Carbon;
+use DB;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Billing extends Model
 {
+    use SoftDeletes;
+    
     protected $fillable = [
     	'billing_no', 'description', 'client_id'
     ];

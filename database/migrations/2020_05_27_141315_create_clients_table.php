@@ -19,6 +19,7 @@ class CreateClientsTable extends Migration
             $table->string('address')->nullable();
             $table->string('tin_no')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

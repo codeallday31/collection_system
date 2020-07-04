@@ -18,6 +18,7 @@ class CreateBillingsTable extends Migration
             $table->text('billing_no');
             $table->text('description');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

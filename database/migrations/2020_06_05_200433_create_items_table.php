@@ -29,6 +29,7 @@ class CreateItemsTable extends Migration
             $table->bigInteger('amount')->nullable();
             
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
