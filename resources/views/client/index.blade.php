@@ -20,7 +20,6 @@
                         <table id="dataTable" class="table table-bordered table-striped table-md">
                             <thead>
                                 <tr>
-                                    <th>Id</th>
                                     <th>Fullname</th>
                                     <th>address</th>
                                     <th>Tin-no.</th>
@@ -30,8 +29,9 @@
                             <tbody>
                                 @foreach ($clients as $client)
                                     <tr>
-                                        <td>{{ $client->id }}</td>
-                                        <td>{{ $client->name }}</td>
+                                        <td>
+                                            <a href="{{ route('client.show', $client->id) }}">{{ $client->name }}</a>
+                                        </td>
                                         <td>{!! nl2br($client->address) !!}</td>
                                         <td>{{ $client->tin_no }}</td>
                                         <td class="text-center align-middle" style="width: 10%">

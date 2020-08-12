@@ -37,9 +37,9 @@ Route::middleware('auth')->group(function(){
     Route::group(['prefix' => 'item', 'as' => 'item.'] , function () {
         Route::resource('category', 'ItemCategoryController')->except('show');
     });
-
+    
     Route::resource('billing', 'BillingController');
-    Route::resource('client', 'ClientController')->except('show');
+    Route::resource('client', 'ClientController');
     Route::resource('account', 'AccountController')->except('show');
 });
 

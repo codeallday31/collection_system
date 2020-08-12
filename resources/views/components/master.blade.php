@@ -38,6 +38,32 @@
                     }
                 });
             })
+
+            if ("{{session()->has('message')}}") {
+                toastr.options = {
+                    "progressBar": true,
+                    "timeOut": "1500",
+                }
+                var alertType = "{{session()->get('alert-type')}}";
+                var message = "{{session()->get('message')}}";
+                switch (alertType) {
+                    case 'info':
+                        toastr.info(message)
+                        break;
+
+                    case 'warning':
+                        toastr.warning(message)
+                        break;
+                    
+                    case 'success':
+                        toastr.success(message)
+                        break;
+                    
+                    case 'error':
+                        toastr.error(message)
+                        break;
+                }
+            }
         </script>
         @yield('customscript')
     </body>

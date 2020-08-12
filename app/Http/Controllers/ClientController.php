@@ -42,6 +42,17 @@ class ClientController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Client $client)
+    {
+        return view('client.show', compact('client'));
+    }
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Client  $client

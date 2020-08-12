@@ -14,9 +14,9 @@ class Client extends Model
     	'name', 'address', 'tin_no'
     ];
 
-    public function billing()
+    public function billings()
     {
-    	return $this->belongsTo(Billing::class);
+    	return $this->hasMany(Billing::class);
     }
     
     public function setAddressAttribute($value)
